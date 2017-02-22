@@ -1,0 +1,43 @@
+<?php
+die('not used '.__FILE__);
+class Cardgate_Cgp_Block_Adminhtml_Resend_Paymentlink extends Mage_Core_Block_Text
+{
+		/**
+		 * {@inheritDoc}
+		 * @see Varien_Data_Form_Element_Renderer_Interface::render()
+		 */
+		public function __construct() {
+			/**
+			 * @var Mage_Sales_Model_Order $order
+			 */
+
+			$order = Mage::getModel( 'sales/order' )->load( $this->getRequest()->get( 'orderid' ) );
+			if ( empty( $order ) ) {
+				$this->addText( Mage::helper('cgp')->__('Error loading order #%s'), $this->getRequest()->get( 'orderid' ) );
+			}
+			$payment = $order->getPayment();
+			if ( empty( $payment ) ) {
+				$this->addText( Mage::helper('cgp')->__('Error loading payment info for order #%s'), $this->getRequest()->get( 'orderid' ) );
+			}
+			try {
+				$title = $payment->getMethodInstance()->getTitle();
+			} catch ( Exception $e ) {
+				/* ignore */
+			}
+			if ( empty( $title ) ) {
+				$title = $payment->getMethod();
+			}
+			$cardgateMethod = ( substr($payment->getMethod(), 0, 3) == 'cgp' );
+			$this->addText( Mage::helper('cgp')->__('Send paymentlink for order #%s to email \'%s\'', $order->getId(), $order->getCustomerEmail() ));
+			if ( $cardgateMethod ) {
+				$this->addText( '<br/><br/>' );
+				$fixedText = Mage::helper('cgp')->__('Send direct paymentlink using method \'%s\'', $title);
+				$fixedUrl = Mage::helper('adminhtml')->getUrl('*/cardgate/resendpayment', array('orderid' => $order->getId()) );
+				$this->addText( '<button class="scalable" type="button" title="'.$fixedText.'" onclick="setLocation(\''.$fixedUrl.'\');">'.$fixedText.'</button>');
+			}
+			$flexText = Mage::helper('cgp')->__('Send checkout-link and allow all available paymentmethods');
+			$flexUrl = Mage::helper('adminhtml')->getUrl('*/cardgate/resendcheckout', array('orderid' => $order->getId()) );
+			$this->addText( '<br/><br/><button class="scalable" type="button" title="'.$flexText.'" onclick="setLocation(\''.$flexUrl.'\');">'.$flexText.'</button>' );
+		}
+
+}
