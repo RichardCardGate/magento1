@@ -600,9 +600,14 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 				$s_arr['option'] = 'bitcoin';
 				break;
 
-			// Bitcoin
+			// POS (offline PM)
 			case 'pos':
 				$s_arr['option'] = 'pos';
+				break;
+
+			// paysafecard
+			case 'paysafecard':
+				$s_arr['option'] = 'paysafecard';
 				break;
 
 			// Default

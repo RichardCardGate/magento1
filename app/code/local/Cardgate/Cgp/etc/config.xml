@@ -550,7 +550,7 @@
 			<cgp_paysafecard translate="title" module="cgp">
 				<active>0</active>
 				<model>cgp/gateway_paysafecard</model>
-				<title>Paysafecard</title>
+				<title>paysafecard</title>
 			</cgp_paysafecard>
 		</cgp>
 	</default>

@@ -308,12 +308,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 				 *
 				 * @var Cardgate_Cgp_Model_Gateway_Abstract $method
 				 */
-				$method = $order->getPayment()->getMethodInstance();
-				if (!$method || substr( $method->getCode(), 0, 4 ) != 'cgp_' ) {
-					$session->addWarning( 'Payment method is not available. Please choose another method.' );
-					$this->resumeOrder( $order, true ); // This redirects the client.
-					exit; // We won't reach this statement.
-				}
+				$method = Mage::getModel( 'cgp/gateway_default');
 				$result = $method->register( $order, true );
 				if ( isset( $result['result'] ) && isset( $result['result']['payment'] ) && isset( $result['result']['payment']['issuer_auth_url'] ) ) {
 					$this->_redirectUrl( $result['result']['payment']['issuer_auth_url'] );

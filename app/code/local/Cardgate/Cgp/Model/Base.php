@@ -305,7 +305,7 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 		}
 
 		$transactionid = $this->getCallbackData( 'transaction_id' );
-		$testmode = $this->getCallbackData( 'testmode' );
+		$testmode = $this->getCallbackData( 'testmode' ) || $this->getCallbackData( 'is_test' );
 
 		$payment = $order->getPayment();
 		$payment->setTransactionId( $transactionid );
@@ -402,6 +402,10 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 				$msg = 'Status not recognised: ' . $this->getCallbackData( 'status' );
 				$this->log( $msg );
 				die( $msg );
+		}
+
+		if ( $this->getCallbackData( 'billing_option' ) ) {
+			$statusMessage.= " (" .  $this->getCallbackData( 'billing_option' ) . ")";
 		}
 
 		// Additional logging for direct-debit

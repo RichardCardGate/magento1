@@ -24,11 +24,17 @@ class Cardgate_Cgp_Block_Info_Payment extends Mage_Payment_Block_Info
 			$extraLinks = '';
 			if ( !empty( $this->getOrder() ) ) {
 				$order = $this->getOrder();
-				if ( intval( $order->getTotalPaid() ) == 0 ) {
+
+				/**
+				 * @var Cardgate_Cgp_Model_Base $base
+				 */
+				$base = Mage::getSingleton( 'cgp/base' );
+
+				if ( $base->getConfigData( 'api_key' ) && $base->getConfigData( 'api_id' ) && intval( $order->getTotalPaid() ) == 0 ) {
 					$text = Mage::helper('cgp')->__('Resend payment link');
 					$url = Mage::helper('adminhtml')->getUrl('*/cardgate/resend', array('orderid' => $order->getId()) );
 					$extraLinks.= '<button class="scalable" type="button" title="'.$text.'" onclick="setLocation(\''.$url.'\');">'.$text.'</button>';
-				} else {
+				} elseif ( intval( $order->getTotalPaid() ) > 0 ) {
 					if ( ! empty( $order->getPayment() ) ) {
 						$info = $order->getPayment()->getAdditionalInformation();
 						if ( !empty( $info['cardgate_transaction_id'])) {
@@ -42,17 +48,15 @@ class Cardgate_Cgp_Block_Info_Payment extends Mage_Payment_Block_Info
 							$text = Mage::helper('cgp')->__('CardGate transaction information %s', $transactionid);
 							$url = "https://".$host."/details/".$transactionid;
 							$extraLinks.= '<button class="scalable" type="button" title="'.$text.'" onclick="popWin(\''.$url.'\', \'Cgp_transaction_info\', \'resizable,scrollbars,status\');">'.$text.'</button>';
-							//$extraLinks.= "<a href=\"https://".$host."/details/".$transactionid."\" target=\"_blank\">Informatie ".$transactionid."</a><br/>";
 						}
 
 					}
 				}
 			}
-			return $extraLinks . '<br/>' . parent::_toHtml();
+			return ($extraLinks ? $extraLinks.'<br/>' : '') . parent::_toHtml();
 		} else {
 			return parent::_toHtml();
 		}
-		//return $la;
 	}
 
 }

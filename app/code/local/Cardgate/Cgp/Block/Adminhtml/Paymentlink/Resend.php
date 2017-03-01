@@ -35,7 +35,7 @@ class Cardgate_Cgp_Block_Adminhtml_Paymentlink_Resend extends Mage_Core_Block_Te
 				$fixedUrl = Mage::helper('adminhtml')->getUrl('*/cardgate/resendpayment', array('orderid' => $order->getId()) );
 				$this->addText( '<button class="scalable" type="button" title="'.$fixedText.'" onclick="setLocation(\''.$fixedUrl.'\');">'.$fixedText.'</button>');
 			}
-			$flexText = Mage::helper('cgp')->__('Send checkout-link and allow all available paymentmethods');
+			$flexText = Mage::helper('cgp')->__('Send direct paymentlink allowing all available paymentmethods');
 			$flexUrl = Mage::helper('adminhtml')->getUrl('*/cardgate/resendcheckout', array('orderid' => $order->getId()) );
 			$this->addText( '<br/><br/><button class="scalable" type="button" title="'.$flexText.'" onclick="setLocation(\''.$flexUrl.'\');">'.$flexText.'</button>' );
 		}
