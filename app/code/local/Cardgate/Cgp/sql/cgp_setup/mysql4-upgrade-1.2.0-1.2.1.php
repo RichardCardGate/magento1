@@ -1,10 +1,8 @@
 <?php
 
-echo "EPOEKOE"; die();
+// $installer = $this;
+// $installer->startSetup();
 
-$installer = $this;
-$installer->startSetup();
+// $installer->getConnection()->addColumn($this->getTable('sales/order'), 'cardgate_resent', 'TIMESTAMP default NULL');
 
-$installer->getConnection()->addColumn($this->getTable('sales/order'), 'cardgate_resent', 'TIMESTAMP default NULL');
-
-$installer->endSetup();
+// $installer->endSetup();
