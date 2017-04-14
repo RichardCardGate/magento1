@@ -72,19 +72,8 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 	 * After a failed transaction a customer will be send here
 	 */
 	public function cancelAction () {
-		switch ( $_REQUEST['cgpstatusid'] ) {
-			case 0:
-				$message = $this->__( 'Your payment is being evaluated by the bank. Please do not attempt to pay again, until your payment is either confirmed or denied by the bank.' );
-				break;
-			case 305:
-				break;
-			case 300:
-				$message = $this->__( 'Your payment has failed. If you wish, you can try using a different payment method.' );
-				break;
-		}
-		if ( isset( $message ) ) {
-			Mage::getSingleton( 'core/session' )->addError( $message );
-		}
+		$message = $this->__( 'Your payment has failed. If you wish, you can try using a different payment method or try again.' );
+		Mage::getSingleton( 'core/session' )->addError( $message );
 
 		$base = Mage::getSingleton( 'cgp/base' );
 		$session = Mage::getSingleton( 'checkout/session' );
@@ -137,6 +126,15 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 		if ( $quote->getId() ) {
 			$quote->setIsActive( false );
 			$quote->delete();
+		} else {
+			/**
+			 *
+			 * @var Mage_Checkout_Model_Session $session
+			 */
+			$session = Mage::getSingleton( 'checkout/session' );
+			if ($this->getRequest()->getParam('code', false) == '200') {
+				$session->addSuccess( $this->__( 'Transaction successfully completed.' ) );
+			}
 		}
 		// clear session flag so that next order will redirect to the gateway
 		// $session->setCgpOnestepCheckout(false);
@@ -248,7 +246,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 
 		$order_id = $this->getRequest()->getParam( 'order' );
 		if ( !$order_id ) {
-			$session->addError( 'An error occurred' );
+			$session->addError( $this->__( 'An error occurred' ) );
 			$this->_redirect( 'checkout/cart' );
 			$this->getResponse()->sendHeadersAndExit();
 			exit;
@@ -261,7 +259,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 		$order = Mage::getSingleton( 'sales/order' )->loadByIncrementId( $order_id );
 
 		if ( $this->getRequest()->getParam('hash') != md5( $order->getCustomerEmail() . $base->getConfigData( 'site_id' ) . $base->getConfigData( 'hash_key' ) . $this->getRequest()->getParam( 'action' ) ) ) {
-			$session->addError( 'A security error occurred' );
+			$session->addError( $this->__( 'A security error occurred' ) );
 		}
 
 		if ( !$order->getPayment() ) {
@@ -270,7 +268,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 		}
 
 		if ( $order->getPayment() && $order->getPayment()->getAmountPaid() > 0 ) {
-			$session->addError( 'Order has already been finished.' );
+			$session->addError( $this->__( 'This order is already paid.' ) );
 			$this->_redirect( 'checkout/cart' );
 			$this->getResponse()->sendHeadersAndExit();
 			exit;
@@ -285,7 +283,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 				 */
 				$method = $order->getPayment()->getMethodInstance();
 				if (!$method || substr( $method->getCode(), 0, 4 ) != 'cgp_' ) {
-					$session->addWarning( 'Payment method is not available. Please choose another method.' );
+					$session->addWarning( $this->__( 'Payment method is not available. Please choose another method.' ) );
 					$this->resumeOrder( $order, true ); // This redirects the client.
 					exit; // We won't reach this statement.
 				}
@@ -295,7 +293,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 					$this->getResponse()->sendHeadersAndExit();
 					exit; // We won't reach this statement.
 				} else {
-					$session->addWarning( 'An exception occurred registering the transaction. Please try again.' );
+					$session->addWarning( $this->__( 'An exception occurred registering the transaction. Please try again.' ) );
 					$this->resumeOrder( $order, true ); // This redirects the client.
 					exit; // We won't reach this statement.
 				}
@@ -315,7 +313,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 					$this->getResponse()->sendHeadersAndExit();
 					exit; // We won't reach this statement.
 				} else {
-					$session->addWarning( 'An exception occurred registering the transaction. Please try again.' );
+					$session->addWarning( $this->__( 'An exception occurred registering the transaction. Please try again.' ) );
 					$this->resumeOrder( $order, true ); // This redirects the client.
 					exit; // We won't reach this statement.
 				}
