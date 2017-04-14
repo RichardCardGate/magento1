@@ -414,6 +414,11 @@
 				<model>cgp/gateway_paysafecard</model>
 				<title>CGP Paysafecard</title>
 			</cgp_paysafecard>
+			<cgp_idealqr>
+				<active>1</active>
+				<model>cgp/gateway_idealqr</model>
+				<title>CGP iDEAL QR</title>
+			</cgp_idealqr>
 		</payment>
 
 		<cgp>
@@ -552,6 +557,11 @@
 				<model>cgp/gateway_paysafecard</model>
 				<title>paysafecard</title>
 			</cgp_paysafecard>
+			<cgp_idealqr translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_idealqr</model>
+				<title>iDEAL QR via je mobiel</title>
+			</cgp_idealqr>
 		</cgp>
 	</default>
 

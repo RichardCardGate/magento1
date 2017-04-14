@@ -71,6 +71,10 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 		return $this->getConfigData( 'debug' );
 	}
 
+	public function isRESTCapable() {
+		return ( $this->getConfigData( 'api_key' ) && $this->getConfigData( 'api_id' ) );
+	}
+
 	/**
 	 * If the test mode is enabled
 	 *
@@ -378,6 +382,12 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 				$newStatus = $statusFailed;
 				$statusMessage = Mage::helper( 'cgp' )->__( 'Payment canceled by user.' );
 				break;
+			case "352":
+				$canceled = true;
+				$newState = Mage_Sales_Model_Order::STATE_CANCELED;
+				$newStatus = $statusFailed;
+				$statusMessage = Mage::helper( 'cgp' )->__( 'Transaction failed 3DS verification.' );
+				break;
 			case "700":
 				// Banktransfer pending status
 				$complete = false;
@@ -399,9 +409,19 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 				$order->save();
 				break;
 			default:
-				$msg = 'Status not recognised: ' . $this->getCallbackData( 'status' );
-				$this->log( $msg );
-				die( $msg );
+				switch( $this->getCallbackData( 'status' ) ) {
+					case "300":
+						$canceled = true;
+						$newState = Mage_Sales_Model_Order::STATE_CANCELED;
+						$newStatus = $statusFailed;
+						$statusMessage = Mage::helper( 'cgp' )->__( 'Payment failed.' );
+						break;
+					default:
+						$msg = 'Status not recognised: ' . $this->getCallbackData( 'status' );
+						$this->log( $msg );
+						die( $msg );
+						break;
+				}
 		}
 
 		if ( $this->getCallbackData( 'billing_option' ) ) {

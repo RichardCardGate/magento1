@@ -131,7 +131,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 		 * @var Cardgate_Cgp_Model_Base $base
 		 */
 		$base = Mage::getSingleton( 'cgp/base' );
-		if ( ! $base->getConfigData( 'api_key' ) || ! $base->getConfigData( 'api_id' ) ) {
+		if ( ! $base->isRESTCapable() ) {
 			$this->_canRefund = false;
 			$this->_canRefundInvoicePartial = false;
 		}
@@ -526,14 +526,14 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 				$s_arr['suboption'] = $extra_data['ideal_issuer_id'];
 				break;
 
-			// Giropay
-			case 'giropay':
-				$s_arr['option'] = 'giropay';
-				break;
-
 			// Mister Cash
 			case 'mistercash':
 				$s_arr['option'] = 'bancontact';
+				break;
+
+			/*// Giropay
+			case 'giropay':
+				$s_arr['option'] = 'giropay';
 				break;
 
 			// PayPal
@@ -544,7 +544,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			// Webmoney
 			case 'webmoney':
 				$s_arr['option'] = 'webmoney';
-				break;
+				break;*/
 
 			// Klarna
 			case 'klarna':
@@ -575,7 +575,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 
 				break;
 
-			// Banktransfer
+			/*// Banktransfer
 			case 'banktransfer':
 				$s_arr['option'] = 'banktransfer';
 				break;
@@ -608,11 +608,11 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			// paysafecard
 			case 'paysafecard':
 				$s_arr['option'] = 'paysafecard';
-				break;
+				break;*/
 
 			// Default
 			default:
-				$s_arr['option'] = '';
+				$s_arr['option'] = $this->_model;
 				$s_arr['suboption'] = '';
 				break;
 		}

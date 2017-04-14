@@ -23,6 +23,14 @@ class Cardgate_Cgp_Model_Observer extends Mage_Core_Model_Abstract
 
 	public function adminhtmlCheckoutSubmitAllAfter ( Varien_Event_Observer $observer )
 	{
+		/**
+		 * @var Cardgate_Cgp_Model_Base $base
+		 */
+		$base = Mage::getSingleton( 'cgp/base' );
+		if ( ! $base->isRESTCapable() ) {
+			return;
+		}
+
 		$quote = $observer->getEvent()->getQuote();
 		$order = $observer->getEvent()->getOrder();
 		$payment = $order->getPayment();
@@ -36,8 +44,7 @@ class Cardgate_Cgp_Model_Observer extends Mage_Core_Model_Abstract
 		 */
 		$paymentmethod = $payment->getMethodInstance();
 		$registerdata = $paymentmethod->register($order);
-echo '<pre>';
-		var_dump( $registerdata );die();
+		// YYY: Do we need $registerdata?
 	}
 
 	protected static function addInvoiceFeeToQuote( $quote )
