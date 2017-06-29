@@ -30,7 +30,12 @@ class Cardgate_Cgp_Block_Info_Payment extends Mage_Payment_Block_Info
 				 */
 				$base = Mage::getSingleton( 'cgp/base' );
 
-				if ( $base->isRESTCapable() && intval( $order->getTotalPaid() ) == 0 ) {
+				if (
+						$base->isRESTCapable() &&
+						intval( $order->getTotalPaid() ) == 0 &&
+						( Mage::getSingleton('admin/session')->isAllowed('cardgate/resendpayment') || Mage::getSingleton('admin/session')->isAllowed('cardgate/resendcheckout') )
+						)
+				{
 					$text = Mage::helper('cgp')->__('Send payment link');
 					$url = Mage::helper('adminhtml')->getUrl('*/cardgate/resend', array('orderid' => $order->getId()) );
 					$extraLinks.= '<button class="scalable" type="button" title="'.$text.'" onclick="setLocation(\''.$url.'\');">'.$text.'</button>';
