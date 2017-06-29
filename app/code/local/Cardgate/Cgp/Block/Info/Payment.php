@@ -22,8 +22,8 @@ class Cardgate_Cgp_Block_Info_Payment extends Mage_Payment_Block_Info
 	protected function _toHtml() {
 		if ( false === $this->getIsSecureMode() ) {
 			$extraLinks = '';
-			if ( !empty( $this->getOrder() ) ) {
-				$order = $this->getOrder();
+			$order = $this->getOrder();
+			if ( $order ) {
 
 				/**
 				 * @var Cardgate_Cgp_Model_Base $base
@@ -40,8 +40,9 @@ class Cardgate_Cgp_Block_Info_Payment extends Mage_Payment_Block_Info
 					$url = Mage::helper('adminhtml')->getUrl('*/cardgate/resend', array('orderid' => $order->getId()) );
 					$extraLinks.= '<button class="scalable" type="button" title="'.$text.'" onclick="setLocation(\''.$url.'\');">'.$text.'</button>';
 				} elseif ( intval( $order->getTotalPaid() ) > 0 ) {
-					if ( ! empty( $order->getPayment() ) ) {
-						$info = $order->getPayment()->getAdditionalInformation();
+					$payment = $order->getPayment();
+					if ( $payment ) {
+						$info = $payment->getAdditionalInformation();
 						if ( !empty( $info['cardgate_transaction_id'])) {
 							$transactionid = $info['cardgate_transaction_id'];
 							$testmode = $info['cardgate_testmode'];
