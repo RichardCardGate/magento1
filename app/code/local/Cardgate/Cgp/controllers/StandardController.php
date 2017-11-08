@@ -77,29 +77,6 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 
 		$base = Mage::getSingleton( 'cgp/base' );
 		$session = Mage::getSingleton( 'checkout/session' );
-		/*
-		 * $order_id = $session->getLastRealOrderId();
-		 * if ( $order_id ) {
-		 * // if order has failed it is canceled via the control url and should
-		 * not be canceled a second time
-		 * $order = Mage::getSingleton( 'sales/order' )->loadByIncrementId(
-		 * $order_id );
-		 *
-		 * if ( $order->getState() != Mage_Sales_Model_Order::STATE_CANCELED ) {
-		 * $order->setState( $base->getConfigData( 'order_status_failed' ) );
-		 * $order->cancel();
-		 * $order->save();
-		 * }
-		 * }
-		 *
-		 * if ( $session->getCgpOnestepCheckout() == true ) {
-		 * $quote = Mage::getModel( 'sales/quote' )->load(
-		 * $session->getCgpOnestepQuoteId() );
-		 * } else {
-		 * $quote = Mage::getModel( 'sales/quote' )->load(
-		 * $session->getCardgateQuoteId() );
-		 * }
-		 */
 		$quote = Mage::getModel( 'sales/quote' )->load( $session->getCardgateQuoteId() );
 
 		if ( $quote->getId() ) {
@@ -108,12 +85,11 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 				$quote->setOrigOrderId( $quote->getReservedOrderId() );
 				$quote->setReservedOrderId();
 			}
+			Mage::getSingleton('checkout/session')->setCartWasUpdated(true);
+			Mage::getSingleton('checkout/session')->setQuoteId( $quote->getId() );
 			$quote->save();
 		}
 
-		// clear session flag so that it will redirect to the gateway, and not
-		// to cancel
-		// $session->setCgpOnestepCheckout(false);
 		$this->_redirect( 'checkout/cart' );
 	}
 
@@ -136,8 +112,6 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 				$session->addSuccess( $this->__( 'Transaction successfully completed.' ) );
 			}
 		}
-		// clear session flag so that next order will redirect to the gateway
-		// $session->setCgpOnestepCheckout(false);
 
 		$this->_redirect( 'checkout/onepage/success', array(
 			'_secure' => true
