@@ -402,7 +402,7 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 				// Direct debit pending status
 				$complete = false;
 				$newState = Mage_Sales_Model_Order::STATE_PENDING_PAYMENT;
-				$newStatus = $statusWaitconf;
+				$newStatus = $statusWaitconf ? $statusWaitconf : 'pending_payment';
 				$statusMessage = Mage::helper( 'cgp' )->__( 'Transaction pending: Waiting for confirmation.' );
 				$order->sendNewOrderEmail();
 				$order->setIsCustomerNotified( true );
@@ -446,80 +446,38 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 		// Update only certain states
 		$canUpdate = false;
 		$undoCancel = false;
-		if ( $order->getState() == Mage_Sales_Model_Order::STATE_NEW || $order->getState() == Mage_Sales_Model_Order::STATE_PENDING_PAYMENT || $order->getState() == Mage_Sales_Model_Order::STATE_CANCELED ) {
+		if (
+				$order->getState() == Mage_Sales_Model_Order::STATE_NEW
+				|| $order->getState() == Mage_Sales_Model_Order::STATE_PENDING_PAYMENT
+				|| $order->getState() == Mage_Sales_Model_Order::STATE_CANCELED
+		) {
 			$canUpdate = true;
-		}
-
-		foreach ( $order->getStatusHistoryCollection( true ) as $_item ) {
-			// Don't update order status if the payment is complete
-			if ( $_item->getStatusLabel() == ucfirst( $statusComplete ) ) {
-				$canUpdate = false;
-				// Uncancel an order if the payment is considered complete
-			} elseif ( ( $_item->getStatusLabel() == ucfirst( $statusFailed ) ) || ( $_item->getStatusLabel() == ucfirst( $statusFraud ) ) ) {
-				$undoCancel = true;
-			}
-		}
-
-		// Unclaim inventory if the payment failed
-		if ( $canUpdate && ! $complete && $canceled && $order->getStatus() != Mage_Sales_Model_Order::STATE_CANCELED ) {
-			$statusMessage .= "<br/>\n" . Mage::helper( 'cgp' )->__( "Unclaimed inventory because order changed to 'Canceled' state." );
-			foreach ( $order->getAllItems() as $_item ) {
-				$stockItem = Mage::getModel( 'cataloginventory/stock_item' )->loadByProduct( $_item->getProductId() );
-				// then set product's stock data to update
-				if ( ! $stockItem->getId() ) {
-					$stockItem->setData( 'product_id', $_item->getProductId() );
-					$stockItem->setData( 'stock_id', 1 );
-				}
-
-				$stockItem->setData( 'qty', $stockItem->getData( 'qty' ) + $_item->getQtyOrdered() );
-				// call save() method to save your product with updated data
-				try {
-					$stockItem->save();
-				} catch ( Exception $ex ) { }
-			}
 		}
 
 		// Lock
 		$this->lock();
 
-		// Uncancel order if necessary
-		if ( $undoCancel ) {
-			foreach ( $order->getAllItems() as $_item ) {
-				if ( $_item->getQtyCanceled() > 0 )
-					$_item->setQtyCanceled( 0 )->save();
-				if ( $_item->getQtyInvoiced() > 0 )
-					$_item->setQtyInvoiced( 0 )->save();
+		// Update the status if changed
+		if (
+				$canUpdate
+				&& (
+						( $newState != $order->getState() )
+						|| ( $newStatus != $order->getStatus() )
+				)
+		) {
+			$this->log( "Changing state to '$newState' from '" . $order->getState() . "' with message '$statusMessage' for order ID: $id." );
+
+			// Reclaim inventory test
+			$bReclaimInventory = false;
+			if ( $order->getState() == Mage_Sales_Model_Order::STATE_CANCELED && $newState != Mage_Sales_Model_Order::STATE_CANCELED ) {
+				// Test first, then change order, finally reclaim inventory
+				$bReclaimInventory = true;
 			}
 
-			$order->setBaseDiscountCanceled( 0 )
-				->setBaseShippingCanceled( 0 )
-				->setBaseSubtotalCanceled( 0 )
-				->setBaseTaxCanceled( 0 )
-				->setBaseTotalCanceled( 0 )
-				->setDiscountCanceled( 0 )
-				->setShippingCanceled( 0 )
-				->setSubtotalCanceled( 0 )
-				->setTaxCanceled( 0 )
-				->setTotalCanceled( 0 );
-		}
-
-		// Update the status if changed
-		if ( $canUpdate && ( ( $newState != $order->getState() ) || ( $newStatus != $order->getStatus() ) ) ) {
-
-			// Reclaim inventory
-			if ( $order->getState() == Mage_Sales_Model_Order::STATE_CANCELED && $newState == Mage_Sales_Model_Order::STATE_PROCESSING ) {
-				$statusMessage .= "<br/>\n" . Mage::helper( 'cgp' )->__( "Reclaimed inventory because order changed from 'Canceled' to 'Processing' state." );
-				foreach ( $order->getAllItems() as $_item ) {
-					$stockItem = Mage::getModel( 'cataloginventory/stock_item' )->loadByProduct( $_item->getProductId() );
-					if ( ! $stockItem->getId() ) {
-						$stockItem->setData( 'product_id', $_item->getProductId() );
-						$stockItem->setData( 'stock_id', 1 );
-					}
-					$stockItem->setData( 'qty', $stockItem->getData( 'qty' ) - $_item->getQtyOrdered() );
-					try {
-						$stockItem->save();
-					} catch ( Exception $ex ) {}
-				}
+			// Unclaimed inventory
+			if ( $canUpdate && ! $complete && $canceled && $order->getStatus() != Mage_Sales_Model_Order::STATE_CANCELED ) {
+				$statusMessage .= "<br/>\n" . Mage::helper( 'cgp' )->__( "Unclaimed inventory because order changed to 'Canceled' state." );
+				$order->cancel();
 			}
 
 			// Set order state and status
@@ -528,7 +486,35 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 			} else {
 				$order->setState( $newState, $newStatus, $statusMessage );
 			}
-			$this->log( "Changing state to '$newState' from '" . $order->getState() . "' with message '$statusMessage' for order ID: $id." );
+
+			// Reclaim inventory
+			if ( $bReclaimInventory ) {
+				$statusMessage .= "<br/>\n" . Mage::helper( 'cgp' )->__( "Reclaimed inventory because order changed from 'Canceled' to 'Processing' state." );
+				$order->save();
+				foreach ( $order->getAllItems() as $_item ) {
+						$_item->setTaxCanceled(0);
+						$_item->setHiddenTaxCanceled(0);
+						$_item->setQtyCanceled( 0 );
+						$_item->save();
+				}
+
+				$order->setBaseDiscountCanceled( 0 )
+					->setBaseShippingCanceled( 0 )
+					->setBaseSubtotalCanceled( 0 )
+					->setBaseTaxCanceled( 0 )
+					->setBaseTotalCanceled( 0 )
+					->setDiscountCanceled( 0 )
+					->setShippingCanceled( 0 )
+					->setSubtotalCanceled( 0 )
+					->setTaxCanceled( 0 )
+					->setTotalCanceled( 0 );
+
+				foreach ( $order->getAllItems() as $_item ) {
+					try {
+						Mage::getSingleton('cataloginventory/stock')->registerItemSale($_item);
+					} catch ( Exception $ex ) {}
+				}
+			}
 
 			// Create an invoice when the payment is completed
 			if ( $complete && ! $canceled && $autocreateInvoice ) {
