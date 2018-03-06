@@ -20,7 +20,7 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 	 * Initialize basic cgp settings
 	 */
 	public function _construct () {
-		$this->_config = Mage::getStoreConfig( 'cgp/settings' );
+		$this->_config = Mage::getStoreConfig( 'cgp/settings', $this->getStoreId() );
 	}
 
 	/**

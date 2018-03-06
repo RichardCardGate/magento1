@@ -76,7 +76,7 @@ class Cardgate_Cgp_Model_Paymentlink extends Mage_Core_Model_Abstract {
 			}
 		}
 
-		$base = Mage::getModel( 'cgp/base' );
+		$base = Mage::getModel( 'cgp/base', array( 'store_id' => $storeId ) );
 		$hash = md5( $order->getCustomerEmail() . $base->getConfigData( 'site_id' ) . $base->getConfigData( 'hash_key' ) . $action );
 
 		// Set all required params and send emails
@@ -84,7 +84,7 @@ class Cardgate_Cgp_Model_Paymentlink extends Mage_Core_Model_Abstract {
 		$mailer->setStoreId( $storeId );
 		$mailer->setTemplateId( $templateId );
 		$mailer->setTemplateParams( array(
-			'payment_link' => Mage::app()->getStore()->getUrl('cgp/standard/resume', array( 'action'=>$action, 'order'=>$order->getIncrementId(), 'hash'=>$hash ) ),
+			'payment_link' => Mage::app()->getStore( $storeId )->getUrl('cgp/standard/resume', array( 'action'=>$action, 'order'=>$order->getIncrementId(), 'hash'=>$hash ) ),
 			'order' => $order,
 			'billing' => $order->getBillingAddress(),
 			'payment_html' => $paymentBlockHtml

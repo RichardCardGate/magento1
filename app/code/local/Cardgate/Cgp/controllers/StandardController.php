@@ -10,6 +10,26 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 
 	private $_gatewayModel;
 
+	private $_base;
+
+	public function _construct () {
+
+		$data = $this->getRequest()->getPost();
+		// Determine storeId
+		$storeId = null;
+		try {
+			if ( $this->getRequest()->has('ref') ) {
+				$storeId = Mage::getModel( 'sales/order' )->loadByIncrementId( $this->getRequest()->get('ref') )->getStoreId();
+			}
+			if ( $storeId == null && $this->getRequest()->has('extra') ) {
+				$storeId = Mage::getModel( 'sales/quote' )->load( $this->getRequest()->get('extra') )->getStoreId();
+			}
+		} catch ( Exception $e ) { }
+
+		$this->_base = Mage::getSingleton( 'cgp/base', array( 'store_id' => $storeId ) );
+
+	}
+
 	/**
 	 * Verify the callback
 	 *
@@ -17,9 +37,14 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 	 * @return boolean
 	 */
 	protected function validate ( $data ) {
-		$base = Mage::getSingleton( 'cgp/base' );
 
-		$hashString = ( ( $data['is_test'] || $data['testmode'] ) ? 'TEST' : '' ) . $data['transaction_id'] . $data['currency'] . $data['amount'] . $data['ref'] . $data['status'] . $base->getConfigData( 'hash_key' );
+		$hashString = ( ( $data['is_test'] || $data['testmode'] ) ? 'TEST' : '' )
+			. $data['transaction_id']
+			. $data['currency']
+			. $data['amount']
+			. $data['ref']
+			. $data['status']
+			. $this->_base->getConfigData( 'hash_key' );
 
 		if ( md5( $hashString ) == $data['hash'] ) {
 			return true;
@@ -75,7 +100,6 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 		$message = $this->__( 'Your payment has failed. If you wish, you can try using a different payment method or try again.' );
 		Mage::getSingleton( 'core/session' )->addError( $message );
 
-		$base = Mage::getSingleton( 'cgp/base' );
 		$session = Mage::getSingleton( 'checkout/session' );
 		$quote = Mage::getModel( 'sales/quote' )->load( $session->getCardgateQuoteId() );
 
@@ -122,22 +146,21 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 	 * Control URL called by gateway
 	 */
 	public function controlAction () {
-		$base = Mage::getModel( 'cgp/base' );
 		$data = $this->getRequest()->getPost();
 
 		// Verify callback hash
 		if ( ! $this->getRequest()->isPost() || ! $this->validate( $data ) ) {
 			$message = 'Callback hash validation failed!';
-			$base->log( $message );
+			$this->_base->log( $message );
 			echo $message;
 			exit();
 		}
 
 		// Process callback
 		if ( intval( $data['amount'] ) < 0 ) {
-			$base->setCallbackData( $data )->processRefundCallback();
+			$this->_base->setCallbackData( $data )->processRefundCallback();
 		} else {
-			$base->setCallbackData( $data )->processCallback();
+			$this->_base->setCallbackData( $data )->processCallback();
 		}
 
 		// Obtain quote and status
@@ -169,11 +192,10 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 	}
 
 	public function testAction () {
-		$base = Mage::getModel( 'cgp/base' );
 		switch ( $this->getRequest()->getParam('action') ) {
 			case "restful":
 				echo '<pre>';
-				if ( $this->getRequest()->getParam('hash') != md5( $base->getConfigData( 'site_id' ) . $base->getConfigData( 'hash_key' ) ) ) {
+				if ( $this->getRequest()->getParam('hash') != md5( $this->_base->getConfigData( 'site_id' ) . $this->_base->getConfigData( 'hash_key' ) ) ) {
 					die ( 'HASHKEY ERROR' );
 				}
 
@@ -199,8 +221,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 	}
 
 	public function versionAction () {
-		$base = Mage::getModel( 'cgp/base' );
-		if ( $this->getRequest()->getParam('hash') != md5( $base->getConfigData( 'site_id' ) . $base->getConfigData( 'hash_key' ) ) ) {
+		if ( $this->getRequest()->getParam('hash') != md5( $this->_base->getConfigData( 'site_id' ) . $this->_base->getConfigData( 'hash_key' ) ) ) {
 			die ( json_encode( array ( 'error'=>true, 'message'=>'Hash error' ) ) );
 		}
 		/**
@@ -211,9 +232,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 	}
 
 	public function resumeAction () {
-		$base = Mage::getModel( 'cgp/base' );
 		/**
-		 *
 		 * @var Mage_Checkout_Model_Session $session
 		 */
 		$session = Mage::getSingleton( 'checkout/session' );
@@ -232,7 +251,7 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 		 */
 		$order = Mage::getSingleton( 'sales/order' )->loadByIncrementId( $order_id );
 
-		if ( $this->getRequest()->getParam('hash') != md5( $order->getCustomerEmail() . $base->getConfigData( 'site_id' ) . $base->getConfigData( 'hash_key' ) . $this->getRequest()->getParam( 'action' ) ) ) {
+		if ( $this->getRequest()->getParam('hash') != md5( $order->getCustomerEmail() . $this->_base->getConfigData( 'site_id' ) . $this->_base->getConfigData( 'hash_key' ) . $this->getRequest()->getParam( 'action' ) ) ) {
 			$session->addError( $this->__( 'A security error occurred' ) );
 		}
 

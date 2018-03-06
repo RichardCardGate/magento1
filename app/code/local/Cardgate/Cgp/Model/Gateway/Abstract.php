@@ -731,7 +731,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 		 *
 		 * @var Cardgate_Cgp_Model_Base $base
 		 */
-		$base = Mage::getModel( 'cgp/base' );
+		$base = Mage::getSingleton( 'cgp/base' );
 		$registerdata = $this->getRegisterFields($order);
 		$registerdata['ip'] = '0.0.0.0'; // unknown at this point
 
@@ -761,7 +761,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 		 *
 		 * @var Cardgate_Cgp_Model_Base $base
 		 */
-		$base = Mage::getModel( 'cgp/base' );
+		$base = Mage::getSingleton( 'cgp/base' );
 
 		$trxid = $this->_getParentTransactionId( $payment );
 		$base->log( "CG REFUND " . $trxid . " -- " . $amount );
