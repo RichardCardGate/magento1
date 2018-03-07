@@ -635,16 +635,18 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 		$s_arr['state'] = $customer->getRegionCode();
 
 		// CURO protocol... because..
-		$s_arr['shipto_firstname'] = $ship_customer->getFirstname();
-		$s_arr['shipto_lastname'] = $ship_customer->getLastname();
-		$s_arr['shipto_company'] = $ship_customer->getCompany();
-		$s_arr['shipto_email'] = $ship_customer->getEmail();
-		$s_arr['shipto_address'] = $ship_customer->getStreet( 1 ) . ( $ship_customer->getStreet( 2 ) ? ', ' . $ship_customer->getStreet( 2 ) : '' );
-		$s_arr['shipto_city'] = $ship_customer->getCity();
-		$s_arr['shipto_country_id'] = $ship_customer->getCountry();
-		$s_arr['shipto_zipcode'] = $ship_customer->getPostcode();
-		$s_arr['shipto_phone'] = $ship_customer->getTelephone();
-		$s_arr['shipto_state'] = $ship_customer->getRegionCode();
+		if ( !empty( $ship_customer ) ) {
+			$s_arr['shipto_firstname'] = $ship_customer->getFirstname();
+			$s_arr['shipto_lastname'] = $ship_customer->getLastname();
+			$s_arr['shipto_company'] = $ship_customer->getCompany();
+			$s_arr['shipto_email'] = $ship_customer->getEmail();
+			$s_arr['shipto_address'] = $ship_customer->getStreet( 1 ) . ( $ship_customer->getStreet( 2 ) ? ', ' . $ship_customer->getStreet( 2 ) : '' );
+			$s_arr['shipto_city'] = $ship_customer->getCity();
+			$s_arr['shipto_country_id'] = $ship_customer->getCountry();
+			$s_arr['shipto_zipcode'] = $ship_customer->getPostcode();
+			$s_arr['shipto_phone'] = $ship_customer->getTelephone();
+			$s_arr['shipto_state'] = $ship_customer->getRegionCode();
+		}
 
 		if ( $this->getConfigData( 'use_backoffice_urls' ) == false ) {
 			$s_arr['return_url'] = Mage::getUrl( 'cgp/standard/success/', array(
