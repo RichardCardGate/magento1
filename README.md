@@ -52,10 +52,10 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 
 6. Enter the **Merchant ID** and **Merchant API Key**, which has been given to you by your CardGate account manager.
 
-7. If you want to use multiple **Store views**, for example in a multilingual webshop, 
+7. If you want to use multiple **Store views**, for example in a multilingual webshop,   
    it is possible that you do not use the default **return URL**. 
    The **return URL** you wish to use you need to specify separately on [My Cardgate](https://my.cardgate.com/) 
-   as will be further explained below.
+   as will be further explained below.  
    When using multiple **Store views** you can configure all the settings for each **Store view** separately.
 
 8. Now set the **Callback URL** on [My Cardgate](https://my.cardgate.com/). This URL is used by CardGate 
