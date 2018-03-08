@@ -1,6 +1,6 @@
 ![CardGate](https://cdn.curopayments.net/thumb/200/logos/cardgate.png)
 
-# CardGate module for PrestaShop 1.7+
+# CardGate module for Magento 1
 
 [![Total Downloads](https://img.shields.io/packagist/dt/cardgate/magento1.svg)](https://packagist.org/packages/cardgate/magento1)
 [![Latest Version](https://img.shields.io/packagist/v/cardgate/magento1.svg)](https://github.com/cardgate/magento1/releases)
