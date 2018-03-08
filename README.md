@@ -12,8 +12,9 @@ This plugin supports Magento version **1.7 to 1.9.3.6**.
 
 ## Preparation
 
-The usage of this module requires that you have obtained CardGate RESTful API credentials.
-Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful API username and password, or contact your accountmanager.
+The usage of this module requires that you have obtained CardGate RESTful API credentials.  
+Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful API username  
+and password, or contact your accountmanager.
 
 ## Installation
 
