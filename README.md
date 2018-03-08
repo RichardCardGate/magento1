@@ -28,7 +28,7 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 4. Under **Direct package file upload**, follow the instructions to upload the CardGate package.
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-2.png)
 
-5. Now click on the <b>Proceed</b> button.
+5. Now click on the <b>Proceed</b> button.<br>
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-7.png)
 
 6. The plug-in is installed.
@@ -52,30 +52,35 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 
 6. Enter the **Merchant ID** and **Merchant API Key**, which has been given to you by your CardGate account manager.
 
-5. If you want to use multiple **Store views**, for example in a multilingual webshop, it is possible that you do not use the default **return URL**. 
-   The **return URL** you wish to use you need to specify separately on [My Cardgate](https://my.cardgate.com/) as will be further explained below.
+7. If you want to use multiple **Store views**, for example in a multilingual webshop, 
+   it is possible that you do not use the default **return URL**. 
+   The **return URL** you wish to use you need to specify separately on [My Cardgate](https://my.cardgate.com/) 
+   as will be further explained below.
    When using multiple **Store views** you can configure all the settings for each **Store view** separately.
 
-6. Now set the **Callback URL** on [My Cardgate](https://my.cardgate.com/). This URL is used by CardGate to pass on successful transactions to your webshop.
-   Go to [My Cardgate](https://my.cardgate.com/), choose **Sites** and select the appropriate site.
-   Go to **Connection to the website** and enter the **Callback URL**.
-   When the Magento webshop is located in the **root** of your website, 
-   for example **http://mywebsite.com**, then the Callback URL is: **http://mywebsite.com/cgp/standard/control/**
-   When the Magento webshop is **not located in the root** of your website, 
-   for example here **http://mywebsite.com/shop/**, then the Callback URL is: **http://mywebsite.com/shop/cgp/standard/control/**
-   When you are using **storeview code** in the URL, like with a multilingual webshop, for example **http://mywebsite.com/index.php/main_en/**, 
-   then the Callback URL is: **http://mywebsite.com/index.php/main_en/cgp/standard/control/**
-   In this case you need to apply a **unique** **Site ID** and **Hash Key** for **each storeview**
+8. Now set the **Callback URL** on [My Cardgate](https://my.cardgate.com/). This URL is used by CardGate 
+   to pass on successful transactions to your webshop.</br>
+   Go to [My Cardgate](https://my.cardgate.com/), choose **Sites** and select the appropriate site.</br>
+   Go to **Connection to the website** and enter the **Callback URL**.</br>
+   When the Magento webshop is located in the **root** of your website, </br>
+   for example **http://mywebsite.com**, then the Callback URL is: **http://mywebsite.com/cgp/standard/control/**</br>
+   When the Magento webshop is **not located in the root** of your website, </br>
+   for example here **http://mywebsite.com/shop/**, then the Callback URL is: **http://mywebsite.com/shop/cgp/standard/control/**</br>
+   When you are using **storeview code** in the URL, like with a multilingual webshop, </br>
+   for example **http://mywebsite.com/index.php/main_en/**, </br>
+   then the Callback URL is: **http://mywebsite.com/index.php/main_en/cgp/standard/control/**</br>
+   In this case you need to apply a **unique** **Site ID** and **Hash Key** for **each storeview**</br>
 
-7. If desired, you can apply a unique **Return URL** and **Return URL failed**.
-   **Attention:** The **Return URL** and **Return URL failed**, by default, are automatically filled in by the Magento plug-in. 
-   You **only** need to enter them manually when you are using the **multi store view** option of Magento. 
-   In this case, make sure that the option **“Use back-­office URLs”** is set to **Yes** in Magento! 
-   Example URL's for using multiple **Store views**:
-   Return URL: **http://www.mywebshop.com/index.php/main_nl/cgp/standard/success/**
-   Return URL failed: **http://www.mywebshop.com/index.php/main_nl/cgp/standard/cancel/**
+9. If desired, you can apply a unique **Return URL** and **Return URL failed**.</br>
+   **Attention:** The **Return URL** and **Return URL failed**, by default, </br>
+   are automatically filled in by the Magento plug-in. </br>
+   You **only** need to enter them manually when you are using the **multi store view** option of Magento. </br>
+   In this case, make sure that the option **“Use back-­office URLs”** is set to **Yes** in Magento! </br>
+   Example URL's for using multiple **Store views**:</br>
+   Return URL: **http://www.mywebshop.com/index.php/main_nl/cgp/standard/success/**</br>
+   Return URL failed: **http://www.mywebshop.com/index.php/main_nl/cgp/standard/cancel/**</br>
    
-8. The setup is now complete.
+10. The setup is now complete.
 
 ## Requirements
 
