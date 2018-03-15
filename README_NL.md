@@ -34,7 +34,7 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
 
 6. De plug-in is geïnstalleerd.
 
-## Configuration
+## Configuratie
 
 1. Ga naar de **Admin Panel** van je webshop.  
 
@@ -74,7 +74,7 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
    dan is de Callback URL: **http://mijnwebsite.com/index.php/main_en/cgp/standard/control/**  
    In dit geval dien je **per storeview**, een **unieke** **Site ID** en **Hash Key** in te vullen bij je webshop instellingen.  
 
-9. Vul ook, indien gewenst, een unieke **Return URL** en **Return URL failed** in.
+9. Vul ook, indien gewenst, een unieke **Return URL** en **Return URL failed** in.   
    **Let op:** De **Return URL** en **Return URL failed** worden standaard automatisch ingevuld door de Magento plug-in.  
    Deze hoeven **alleen** handmatig te worden opgegeven wanneer je de **multi store view** optie van Magento gebruikt.  
    Zorg er in dat geval dan voor dat de optie **“Use back-­office URLs”** op **Yes** is ingesteld in Magento!  
