@@ -2,10 +2,6 @@
 
 # CardGate module voor Magento 1
 
-[![Total Downloads](https://img.shields.io/packagist/dt/cardgate/magento1.svg)](https://packagist.org/packages/cardgate/magento1)
-[![Latest Version](https://img.shields.io/packagist/v/cardgate/magento1.svg)](https://github.com/cardgate/magento1/releases)
-[![Build Status](https://travis-ci.org/cardgate/magento1.svg?branch=master)](https://travis-ci.org/cardgate/magento1)
-
 ## Support
 
 Deze plug-in is geschikt voor Magento Commerce versie **1.7 tot 1.9.3.6**
