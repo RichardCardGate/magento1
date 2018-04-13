@@ -9,7 +9,7 @@ This module supports Magento version **1.7 to 1.9.3.6**.
 ## Preparation
 
 The usage of this module requires that you have obtained CardGate RESTful API credentials.  
-Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your credentials, or contact your accountmanager.
+Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentials, or contact your accountmanager.
 
 ## Installation
 
@@ -37,7 +37,7 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your credentia
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-8.png)
 
 3. Click on **CardGate** in the **Sales** section of the configuration menu.
-   (When **CardGate** is not yet visible, log out from the **Admin Panel** and login again.)
+   (When **CardGate** is not yet visible, log out from the **Admin Panel** and login again.)  
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-9.png)
 
 4. Enter your settings here. (The settings shown below are examples.)
@@ -59,7 +59,8 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your credentia
    Go to [My CardGate](https://my.cardgate.com/), choose **Sites** and select the appropriate site.  
    Go to **Connection to the website** and enter the **Callback URL**.  
    When the Magento webshop is located in the **root** of your website,  
-   for example **http://mywebsite.com**, then the Callback URL is: **http://mywebsite.com/cgp/standard/control/**  
+   for example **http://mywebsite.com**, then the Callback URL is:  
+   **http://mywebsite.com/cgp/standard/control/**  
    When the Magento webshop is **not located in the root** of your website,  
    for example here **http://mywebsite.com/shop/**, then the Callback URL is: **http://mywebsite.com/shop/cgp/standard/control/**  
    When you are using **storeview code** in the URL, like with a multilingual webshop,  
