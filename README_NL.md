@@ -22,7 +22,7 @@ gegevens op, of neem contact op met je accountmanager.
 3. Kies **System**, **Magento Connect**, **Connect Manager**.
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-1.png)
 
-4. Volg de instructies bij **Direct package upload** en upload het Cardgate bestand.  
+4. Volg de instructies bij **Direct package upload** en upload het CardGate bestand.  
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-2.png)
 
 5. Klik nu op de **Proceed** knop.  
