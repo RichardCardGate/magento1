@@ -4,13 +4,12 @@
 
 ## Support
 
-This plugin supports Magento version **1.7 to 1.9.3.6**.
+This module supports Magento version **1.7 to 1.9.3.6**.
 
 ## Preparation
 
 The usage of this module requires that you have obtained CardGate RESTful API credentials.  
-Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful API username  
-and password, or contact your accountmanager.
+Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your credentials, or contact your accountmanager.
 
 ## Installation
 
@@ -28,7 +27,7 @@ and password, or contact your accountmanager.
 5. Now click on the <b>Proceed</b> button.  
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-7.png)
 
-6. The plug-in is installed.
+6. The module is installed.
 
 ## Configuration
 
@@ -38,26 +37,26 @@ and password, or contact your accountmanager.
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-8.png)
 
 3. Click on **CardGate** in the **Sales** section of the configuration menu.
-   (When **CardGate** is not yet visible, log out from the **Admin Panel** and login again)
+   (When **CardGate** is not yet visible, log out from the **Admin Panel** and login again.)
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-9.png)
 
-4. Enter your settings here. (The settings shown below are examples)
+4. Enter your settings here. (The settings shown below are examples.)
    Activate the payment methods you wish to use and then click on **Save Config**.
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-10.png)
 
-5. Enter the **Site ID**, and the **Hash Key** which you can find at **Sites** on My CardGate.
+5. Enter the **site ID**, and the **hash key** which you can find at **Sites** on My CardGate.
 
-6. Enter the **Merchant ID** and **Merchant API Key**, which has been given to you by your CardGate account manager.
+6. Enter the **merchant ID** and **API key**, which has been given to you by your CardGate account manager.
 
 7. If you want to use multiple **Store views**, for example in a multilingual webshop,   
    it is possible that you do not use the default **return URL**.  
-   The **return URL** you wish to use you need to specify separately on [My Cardgate](https://my.cardgate.com/)   
+   The **return URL** you wish to use you need to specify separately on [My CardGate](https://my.cardgate.com/)   
    as will be further explained below.  
    When using multiple **Store views** you can configure all the settings for each **Store view** separately.
 
-8. Now set the **Callback URL** on [My Cardgate](https://my.cardgate.com/). This URL is used by CardGate 
+8. Now set the **Callback URL** on [My CardGate](https://my.cardgate.com/). This URL is used by CardGate 
    to pass on successful transactions to your webshop.  
-   Go to [My Cardgate](https://my.cardgate.com/), choose **Sites** and select the appropriate site.  
+   Go to [My CardGate](https://my.cardgate.com/), choose **Sites** and select the appropriate site.  
    Go to **Connection to the website** and enter the **Callback URL**.  
    When the Magento webshop is located in the **root** of your website,  
    for example **http://mywebsite.com**, then the Callback URL is: **http://mywebsite.com/cgp/standard/control/**  
@@ -66,11 +65,11 @@ and password, or contact your accountmanager.
    When you are using **storeview code** in the URL, like with a multilingual webshop,  
    for example **http://mywebsite.com/index.php/main_en/**,  
    then the Callback URL is: **http://mywebsite.com/index.php/main_en/cgp/standard/control/**  
-   In this case you need to apply a **unique** **Site ID** and **Hash Key** for **each storeview**  
+   In this case you need to apply a **unique** **site ID** and **hash key** for **each storeview**.  
 
 9. If desired, you can apply a unique **Return URL** and **Return URL failed**.  
    **Attention:** The **Return URL** and **Return URL failed**, by default,  
-   are automatically filled in by the Magento plug-in.  
+   are automatically filled in by the Magento module.  
    You **only** need to enter them manually when you are using the **multi store view** option of Magento.  
    In this case, make sure that the option **“Use back-­office URLs”** is set to **Yes** in Magento!  
    Example URL's for using multiple **Store views**:  
