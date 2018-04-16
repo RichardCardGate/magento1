@@ -2,19 +2,15 @@
 
 # CardGate module voor Magento 1
 
-[![Total Downloads](https://img.shields.io/packagist/dt/cardgate/magento1.svg)](https://packagist.org/packages/cardgate/magento1)
-[![Latest Version](https://img.shields.io/packagist/v/cardgate/magento1.svg)](https://github.com/cardgate/magento1/releases)
-[![Build Status](https://travis-ci.org/cardgate/magento1.svg?branch=master)](https://travis-ci.org/cardgate/magento1)
-
 ## Support
 
-Deze plug-in is geschikt voor Magento Commerce versie **1.7 tot 1.9.3.6**
+Deze module is geschikt voor Magento Commerce versie **1.7 tot 1.9.3.6** .
 
 ## Voorbereiding
 
 Voor het gebruik van deze module zijn CardGate RESTful gegevens nodig.
 Bezoek hiervoor [Mijn CardGate](https://my.cardgate.com/) en haal daar je 
-RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountmanager.
+gegevens op, of neem contact op met je accountmanager.
 
 ## Installatie
 
@@ -26,13 +22,13 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
 3. Kies **System**, **Magento Connect**, **Connect Manager**.
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-1.png)
 
-4. Volg de instructies bij **Direct package upload** en upload het Cardgate bestand.  
+4. Volg de instructies bij **Direct package upload** en upload het CardGate bestand.  
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-2.png)
 
 5. Klik nu op de **Proceed** knop.  
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-7.png)
 
-6. De plug-in is geïnstalleerd.
+6. De module is geïnstalleerd.
 
 ## Configuratie
 
@@ -42,16 +38,16 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-8.png)
 
 3. Klik op **CardGate** in het **Sales** gedeelte van het configuratie menu.  
-   (Indien **CardGate** niet zichtbaar is, log dan uit de **Admin Panel** en log daarna weer in)  
+   (Indien **CardGate** niet zichtbaar is, log dan uit de **Admin Panel** en log daarna weer in.)  
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-9.png)
 
-4. Vul hier je instellingen in. (De getoonde instellingen hieronder zijn slechts voorbeelden)  
+4. Vul hier je instellingen in. (De getoonde instellingen hieronder zijn slechts voorbeelden.)  
    Activeer tevens de betaalmethoden die je wenst te gaan gebruiken en klik daarna op **Save Config**.  
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-10.png)
 
-5. De **Site ID** en de **Hash Key (Codeersleutel)** kun je vinden bij **Sites** op [Mijn CardGate](https://my.cardgate.com/)  
+5. De **site ID** en de **hash key** kun je vinden bij **Sites** op [Mijn CardGate](https://my.cardgate.com/).  
 
-6. Vul de  **Merchant ID** en **Merchant API Key** in, die je gekregen hebt van je CardGate account manager.
+6. Vul de  **merchant ID** en **API key** in, die je gekregen hebt van je CardGate account manager.
 
 7. Indien je meerdere **Store views** gebruikt, bijvoorbeeld bij een meertalige webshop,  
    dan kan het zijn dat je niet de standaard **return URL** gebruikt.  
@@ -72,10 +68,10 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
    Wanneer je een **storeview code** in de URL gebruikt, zoals bij meertalige websites,  
    bijvoorbeeld **http://mijnwebsite.com/index.php/main_en/**,   
    dan is de Callback URL: **http://mijnwebsite.com/index.php/main_en/cgp/standard/control/**  
-   In dit geval dien je **per storeview**, een **unieke** **Site ID** en **Hash Key** in te vullen bij je webshop instellingen.  
+   In dit geval dien je **per storeview**, een **unieke** **site ID** en **hash key** in te vullen bij je webshop instellingen.  
 
 9. Vul ook, indien gewenst, een unieke **Return URL** en **Return URL failed** in.   
-   **Let op:** De **Return URL** en **Return URL failed** worden standaard automatisch ingevuld door de Magento plug-in.  
+   **Let op:** De **Return URL** en **Return URL failed** worden standaard automatisch ingevuld door de Magento module.  
    Deze hoeven **alleen** handmatig te worden opgegeven wanneer je de **multi store view** optie van Magento gebruikt.  
    Zorg er in dat geval dan voor dat de optie **“Use back-­office URLs”** op **Yes** is ingesteld in Magento!  
    Voorbeeld URL's bij meerdere **Store views**:  
