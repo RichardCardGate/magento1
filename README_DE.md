@@ -16,7 +16,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 1. Downloaden Sie den aktuellsten **Source Code (tar.gz)** auf Ihrem Desktop.
 
 2. Gehen Sie zum **Adminbereich** Ihres Webshops.
-(Zum beispiel: **http://mywebshop.com/index.php/admin**)
+(Zum beispiel: **http://meinewebsite.com/index.php/admin**)
 
 3. **System** wählen, **Magneto Connect**, **Connect Manager**.
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-1.png)
@@ -37,7 +37,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-8.png)
 
 3. Klicken Sie auf **CardGate** in dem **Sales**-Bereich von dem Konfigurationsmenü.  
-   (Falls **CardGate** nicht sichtbar ist, loggen sich aus dem **Admin Panel** aus und wieder ein.)
+   (Falls **CardGate** nicht sichtbar ist, loggen sich aus dem **Admin Panel** aus und wieder ein.)  
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-9.png)
 
 4. Füllen Sie die Einstellungen ein. (Die unten angezeigten Einstellungen sind lediglich Beispiele.)  
@@ -64,7 +64,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
    dann ist die Callback URL: **http://meinewebsite.com/index.php/main_en/cgp/standard/control/**  
    In diesem Fall müssen Sie **per storeview**, eine **unique Site ID**> und **Hash Key** in den Website-Einstellungen festlegen.  
 
-9. Füllen Sie falls gewünscht eine **Return URL** und eine **Return URL failed** ein.
+9. Füllen Sie falls gewünscht eine **Return URL** und eine **Return URL failed** ein.  
    **Achtung:** Die **Return URL** und die **Return URL failed** werden automatisch durch das Magento Plugin eingestellt.  
    Diese müssen **lediglich** per Hand eingefüllt werden, wenn Sie die  **multi store view** Option van Magento verwenden.  
    Zorg er in dat geval dan voor dat de optie **"Use back-­office URLs”** op **Yes** is ingesteld in Magento! 
