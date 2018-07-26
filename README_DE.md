@@ -69,8 +69,8 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
    Diese müssen **lediglich** per Hand eingefüllt werden, wenn Sie die  **multi store view** Option van Magento verwenden.  
    Zorg er in dat geval dan voor dat de optie **"Use back-­office URLs”** op **Yes** is ingesteld in Magento! 
    Beispiel URL's bei mehreren **Store views**:  
-   Return URL: **http://www.meinwebshop.com/index.php/main_nl/cgp/standard/success/**  
-   Return URL failed: **http://www.meinwebshop.com/index.php/main_nl/cgp/standard/cancel/**   
+   Return URL: **http://www.meinwebsite.com/index.php/main_nl/cgp/standard/success/**  
+   Return URL failed: **http://www.meinwebsite.com/index.php/main_nl/cgp/standard/cancel/**   
    
 10. Die Einstellungen sind nun durchgeführt.
 
