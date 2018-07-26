@@ -24,7 +24,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 4. Under **Direct package file upload**, follow the instructions to upload the CardGate package.
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-2.png)
 
-5. Klicken Sie nun auf den **Proceed** Button. 
+5. Klicken Sie nun auf den **Proceed** Button.  
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-7.png)
 
 6. Das Modul ist installiert.
@@ -36,7 +36,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 2. Klicken Sie in Ihrem **Adminbereich** auf **System** und klicken Sie danach auf **Konfiguration**.
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-8.png)
 
-3. Klicken Sie auf **CardGate** in dem **Sales**-Bereich von dem Konfigurationsmenü.
+3. Klicken Sie auf **CardGate** in dem **Sales**-Bereich von dem Konfigurationsmenü.  
    (Falls **CardGate** nicht sichtbar ist, loggen sich aus dem **Admin Panel** aus und wieder ein.)
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-9.png)
 
@@ -52,9 +52,8 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
    dann kann es sein, dass Sie nicht die Standart **Return URL** verwenden.  
    Die **Return URL** die Sie verwenden möchten, Muss dann gesondert eingefüllt werden unter [My CardGate](https://my.cardgate.com/) sowie als folgt beschrieben.  
 
-8. Gehen Sie nun zu **My CardGate**, klicken Sie auf **Sites** und wählen Sie die gewünschte Seite aus. 
+8. Gehen Sie nun zu **My CardGate**, klicken Sie auf **Sites** und wählen Sie die gewünschte Seite aus.  
    Füllen Sie nun bei **Technische Schnittstelle** die **Callback URL** ein.   
-   
    Wenn der Magento Webshop in dem **Root Verzeichnis** von Ihrer Webseite steht,  
    z.B. **http://meinewebsite.com**, dann muss die folgende Callback URL verwendet werden:  
    **http://www.meinewebsite.com/cgp/standard/control/**  
