@@ -58,7 +58,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
    z.B. **http://meinewebsite.com**, dann muss die folgende Callback URL verwendet werden:  
    **http://www.meinewebsite.com/cgp/standard/control/**  
    Falls der Magento Webshop **nicht im Rootverzeichnis** Ihrer Webseite steht,  
-   z.B in **http://meinewebsite.com/shop/**,dann ist die Callback URL:  
+   z.B in **http://meinewebsite.com/shop/**, dann ist die Callback URL:  
    **http://meinewebsite.com/shop/cgp/standard/control/**  
    Falls Sie einen **Storeview Code** in der URL verwenden, sowie z.B bei mehrsprachigen Webseiten,  
    z.B. **http://meinewebsite.com/index.php/main_en/**,  
