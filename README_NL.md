@@ -14,7 +14,7 @@ gegevens op, of neem contact op met je accountmanager.
 
 ## Installatie
 
-1. Download het **Cardgate_Cgp.tgz** bestand en plaats het op je desktop.
+1. Download het **[Source Code (tar.gz)](https://github.com/cardgate/magento1/releases)** bestand en plaats het op je desktop.
 
 2. Ga naar de **Admin Panel** van je webshop.  
    (Bijvoorbeeld **http://mijnwebshop.com/index.php/admin**)

@@ -13,7 +13,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 
 ## Installation
 
-1. Downloaden Sie den aktuellsten **Source Code (tar.gz)** auf Ihrem Desktop.
+1. Downloaden Sie den aktuellsten **[Source Code (tar.gz)](https://github.com/cardgate/magento1/releases)** auf Ihrem Desktop.
 
 2. Gehen Sie zum **Adminbereich** Ihres Webshops.
 (Zum beispiel: **http://meinewebsite.com/index.php/admin**)
@@ -21,7 +21,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 3. **System** wählen, **Magneto Connect**, **Connect Manager**.
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-1.png)
 
-4. Under **Direct package file upload**, follow the instructions to upload the CardGate package.
+4. Folgen Sie unter **Direct package file upload**,  der Anleitung um die CardGate Datei hochzuladen. 
 ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-2.png)
 
 5. Klicken Sie nun auf den **Proceed** Button.  
@@ -36,7 +36,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 2. Klicken Sie in Ihrem **Adminbereich** auf **System** und klicken Sie danach auf **Konfiguration**.
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-8.png)
 
-3. Klicken Sie auf **CardGate** in dem **Sales**-Bereich von dem Konfigurationsmenü.  
+3. Klicken Sie auf **CardGate** in dem **Sales**-Bereich von dem Konfigurationsmenü.
    (Falls **CardGate** nicht sichtbar ist, loggen sich aus dem **Admin Panel** aus und wieder ein.)  
    ![CardGate](https://cardgate.com/wp-content/uploads/magento-install-9.png)
 
@@ -49,8 +49,8 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 6. Füllen Sie die **merchant ID** und den **API key** ein, den Sie von CardGate empfangen haben.
 
 7. Falls Sie mehrere **Store Views** verwenden, wie z.B bei einem mehrsprachigen Webshop,  
-   dann kann es sein, dass Sie nicht die Standart **Return URL** verwenden.  
-   Die **Return URL** die Sie verwenden möchten, Muss dann gesondert eingefüllt werden unter [My CardGate](https://my.cardgate.com/) sowie als folgt beschrieben.  
+   dann kann es sein, dass Sie nicht die Standart **Return URL** verwenden können.  
+   Die **Return URL** die Sie verwenden möchten, muss dann gesondert eingefüllt werden unter [My CardGate](https://my.cardgate.com/) sowie als folgt beschrieben.   
 
 8. Gehen Sie nun zu **My CardGate**, klicken Sie auf **Sites** und wählen Sie die gewünschte Seite aus.  
    Füllen Sie nun bei **Technische Schnittstelle** die **Callback URL** ein.   
@@ -62,12 +62,12 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
    Falls Sie einen **Storeview Code** in der URL verwenden, sowie z.B bei mehrsprachigen Webseiten,  
    z.B. **http://meinewebsite.com/index.php/main_en/**,  
    dann ist die Callback URL: **http://meinewebsite.com/index.php/main_en/cgp/standard/control/**  
-   In diesem Fall müssen Sie **per storeview**, eine **unique Site ID**> und **Hash Key** in den Website-Einstellungen festlegen.  
+   In diesem Fall müssen Sie **per storeview**, eine **unique Site ID** und **Hash Key** in den Website-Einstellungen festlegen.  
 
 9. Füllen Sie falls gewünscht eine **Return URL** und eine **Return URL failed** ein.  
    **Achtung:** Die **Return URL** und die **Return URL failed** werden automatisch durch das Magento Plugin eingestellt.  
    Diese müssen **lediglich** per Hand eingefüllt werden, wenn Sie die  **multi store view** Option van Magento verwenden.  
-   Zorg er in dat geval dan voor dat de optie **"Use back-­office URLs”** op **Yes** is ingesteld in Magento! 
+   Vergewissern Sie sich in diesem Fall, das die Option **"Use back-­office URLs”** auf **Ja** steht bei Magento!  
    Beispiel URL's bei mehreren **Store views**:  
    Return URL: **http://www.meinwebsite.com/index.php/main_nl/cgp/standard/success/**  
    Return URL failed: **http://www.meinwebsite.com/index.php/main_nl/cgp/standard/cancel/**   
