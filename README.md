@@ -13,7 +13,7 @@ Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentia
 
 ## Installation
 
-1. Download the **Cardgate_Cgp.tgz** file to your desktop.
+1. Download the **[Source Code (tar.gz)](https://github.com/cardgate/magento1/releases)** file to your desktop.
 
 2. Go to the **Admin Panel** of your webshop.
 (Example **http://mywebshop.com/index.php/admin**)
