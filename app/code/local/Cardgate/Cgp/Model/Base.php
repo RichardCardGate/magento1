@@ -307,7 +307,29 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 			$this->log( 'Amount validation failed!' );
 			exit();
 		}
-
+		
+		// If a canceled order is now paid, then reorder the order first
+		
+		if ($order->getState() == Mage_Sales_Model_Order::STATE_CANCELED && $this->getCallbackData( 'status_id' ) == "200"){
+		    $quoteId = $order->getQuoteId();
+		    $storeId = $order->getStoreId();
+		    $quote = Mage::getModel("sales/quote")
+		    ->setStoreId($storeId)
+		    ->load($quoteId);
+		   
+		    $quote->collectTotals();
+		    $service = Mage::getModel('sales/service_quote', $quote);
+		    $service->submitAll();
+		    $order = $service->getOrder();
+		    $order->save();
+		    
+		    $sPaymentCode = 'cgp_'.$this->getCallbackData( 'billing_option' );
+		    $payment = $order->getPayment();
+		    $payment->setMethod($sPaymentCode);
+		    $payment->save();
+		   
+		}
+		
 		$transactionid = $this->getCallbackData( 'transaction_id' );
 		$testmode = $this->getCallbackData( 'testmode' ) || $this->getCallbackData( 'is_test' );
 
