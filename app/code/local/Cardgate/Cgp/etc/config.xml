@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.6</version>
+			<version>1.2.7</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -411,6 +411,11 @@
 				<model>cgp/gateway_idealqr</model>
 				<title>CGP iDEAL QR</title>
 			</cgp_idealqr>
+			<cgp_billink>
+				<active>1</active>
+				<model>cgp/gateway_billink</model>
+				<title>CGP Billink</title>
+			</cgp_billink>
 		</payment>
 
 		<cgp>
@@ -554,6 +559,11 @@
 				<model>cgp/gateway_idealqr</model>
 				<title>iDEAL QR via je mobiel</title>
 			</cgp_idealqr>
+			<cgp_billink translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_billink</model>
+				<title>Billink</title>
+			</cgp_billink>
 		</cgp>
 	</default>
 

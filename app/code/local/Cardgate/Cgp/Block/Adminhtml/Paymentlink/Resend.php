@@ -15,6 +15,7 @@ class Cardgate_Cgp_Block_Adminhtml_Paymentlink_Resend extends Mage_Core_Block_Te
 			if ( empty( $order ) ) {
 				$this->addText( Mage::helper('cgp')->__('Error loading order #%s'), $this->getRequest()->get( 'orderid' ) );
 			}
+
 			$payment = $order->getPayment();
 			if ( empty( $payment ) ) {
 				$this->addText( Mage::helper('cgp')->__('Error loading payment info for order #%s'), $this->getRequest()->get( 'orderid' ) );

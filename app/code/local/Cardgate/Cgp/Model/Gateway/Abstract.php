@@ -619,7 +619,8 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 
 		// Add new state
 		$this->initiateTransactionStatus( $order );
-
+        
+		//$s_arr['bypass_simulator'] = 1;
 		$s_arr['siteid'] = $this->getConfigData( 'site_id' );
 		$s_arr['ref'] = $order->getIncrementId();
 
@@ -627,7 +628,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 		$s_arr['last_name'] = $customer->getLastname();
 		$s_arr['company_name'] = $customer->getCompany();
 		$s_arr['email'] = $order->getCustomerEmail();
-		$s_arr['address'] = $customer->getStreet( 1 ) . ( $customer->getStreet( 2 ) ? ', ' . $customer->getStreet( 2 ) : '' );
+		$s_arr['address'] = $customer->getStreet( 1 ) . ( $customer->getStreet( 2 ) ? ' ' . $customer->getStreet( 2 ) : '' );
 		$s_arr['city'] = $customer->getCity();
 		$s_arr['country_code'] = $customer->getCountry();
 		$s_arr['postal_code'] = $customer->getPostcode();
@@ -640,7 +641,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			$s_arr['shipto_lastname'] = $ship_customer->getLastname();
 			$s_arr['shipto_company'] = $ship_customer->getCompany();
 			$s_arr['shipto_email'] = $ship_customer->getEmail();
-			$s_arr['shipto_address'] = $ship_customer->getStreet( 1 ) . ( $ship_customer->getStreet( 2 ) ? ', ' . $ship_customer->getStreet( 2 ) : '' );
+			$s_arr['shipto_address'] = $ship_customer->getStreet( 1 ) . ( $ship_customer->getStreet( 2 ) ? ' ' . $ship_customer->getStreet( 2 ) : '' );
 			$s_arr['shipto_city'] = $ship_customer->getCity();
 			$s_arr['shipto_country_id'] = $ship_customer->getCountry();
 			$s_arr['shipto_zipcode'] = $ship_customer->getPostcode();
