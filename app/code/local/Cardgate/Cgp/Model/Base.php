@@ -308,9 +308,10 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 			exit();
 		}
 		
-		// If a canceled order is now paid, then reorder the order first
-		
+		// If a canceled order is now paid, then uncancel the order first
+		/*
 		if ($order->getState() == Mage_Sales_Model_Order::STATE_CANCELED && $this->getCallbackData( 'status_id' ) == "200"){
+		    $order = $this->uncancel($order);
 		    $quoteId = $order->getQuoteId();
 		    $storeId = $order->getStoreId();
 		    $quote = Mage::getModel("sales/quote")
@@ -328,7 +329,7 @@ class Cardgate_Cgp_Model_Base extends Varien_Object {
 		    $payment->setMethod($sPaymentCode);
 		    $payment->save();
 		   
-		}
+		}*/
 		
 		$transactionid = $this->getCallbackData( 'transaction_id' );
 		$testmode = $this->getCallbackData( 'testmode' ) || $this->getCallbackData( 'is_test' );

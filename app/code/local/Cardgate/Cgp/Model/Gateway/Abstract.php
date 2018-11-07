@@ -487,8 +487,8 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			);
 			$cartpricetotal += ceil( $order->getTaxAmount() * 100 ) - $cartvattotal;
 		}
-		if ( $cartpricetotal != ceil( $order->getGrandTotal() * 100 )) {
-			$iCorrectionAmount = ( ceil( $order->getGrandTotal() * 100 ) / 100 ) - ( $cartpricetotal / 100 );
+		if ( $cartpricetotal != round( $order->getGrandTotal() * 100 )) {
+			$iCorrectionAmount = ( round( $order->getGrandTotal() * 100 ) / 100 ) - ( $cartpricetotal / 100 );
 			$cartitems[] = array(
 				'quantity' => '1',
 				'sku' => 'cg-correction',
@@ -670,7 +670,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			$hash_prefix = '';
 		}
 
-		$s_arr['amount'] = sprintf( '%.0f', ceil( $order->getGrandTotal() * 100 ) );
+		$s_arr['amount'] = sprintf( '%.0f', round( $order->getGrandTotal() * 100 ) );
 		$s_arr['currency'] = $order->getOrderCurrencyCode();
 		$s_arr['description'] = str_replace( '%id%', $order->getIncrementId(), $this->getConfigData( 'order_description' ) );
 		$s_arr['hash'] = md5( $hash_prefix . $this->getConfigData( 'site_id' ) . $s_arr['amount'] . $s_arr['ref'] . $this->getConfigData( 'hash_key' ) );
