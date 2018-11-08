@@ -4,7 +4,7 @@
 
 ## Support
 
-Deze module is geschikt voor Magento Commerce versie **1.7 tot 1.9.3.6** .
+Deze module is geschikt voor Magento Commerce versie **1.7 tot 1.9.3.x** .
 
 ## Voorbereiding
 
