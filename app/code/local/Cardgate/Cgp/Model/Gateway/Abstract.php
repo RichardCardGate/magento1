@@ -307,7 +307,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 	 * @return array
 	 */
 	public function getCheckoutFormFields () {
-		$extra_data = $_SESSION['cgp_formdata']['payment']['cgp'];
+	    $extra_data=(!empty($_SESSION['cgp_formdata']['payment']['cgp'])?$_SESSION['cgp_formdata']['payment']['cgp']:null);
 		$order = $this->getOrder();
 
 		try {
