@@ -307,7 +307,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 	 * @return array
 	 */
 	public function getCheckoutFormFields () {
-		$extra_data = $_SESSION['cgp_formdata']['payment']['cgp'];
+	    $extra_data=(!empty($_SESSION['cgp_formdata']['payment']['cgp'])?$_SESSION['cgp_formdata']['payment']['cgp']:null);
 		$order = $this->getOrder();
 
 		try {
@@ -608,7 +608,18 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			// paysafecard
 			case 'paysafecard':
 				$s_arr['option'] = 'paysafecard';
-				break;*/
+				break;
+				
+		    // Billink
+			case 'billink':
+			    $s_arr['option'] = 'billink';
+			    break;
+		
+		    //Gift Card
+			case 'giftcard':
+			    $s_arr['option'] = 'giftcard';
+			    break;
+		     */
 
 			// Default
 			default:

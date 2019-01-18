@@ -24,7 +24,7 @@ class Cardgate_Cgp_Block_Info_Payment extends Mage_Payment_Block_Info
 			$extraLinks = '';
 			$order = $this->getOrder();
 			if ( $order ) {
- 
+
 				/**
 				 * @var Cardgate_Cgp_Model_Base $base
 				 */
