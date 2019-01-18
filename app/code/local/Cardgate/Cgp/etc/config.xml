@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.8</version>
+			<version>1.2.9</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -416,6 +416,16 @@
 				<model>cgp/gateway_billink</model>
 				<title>CGP Billink</title>
 			</cgp_billink>
+			<cgp_paysafecash>
+				<active>1</active>
+				<model>cgp/gateway_paysafecash</model>
+				<title>CGP Paysafecash</title>
+			</cgp_paysafecash>
+			<cgp_giftcard>
+				<active>1</active>
+				<model>cgp/gateway_giftcard</model>
+				<title>CGP Gift Card</title>
+			</cgp_giftcard>
 		</payment>
 
 		<cgp>
@@ -564,8 +574,17 @@
 				<model>cgp/gateway_billink</model>
 				<title>Billink</title>
 			</cgp_billink>
+			<cgp_paysafecash translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_paysafecash</model>
+				<title>Paysafecash</title>
+			</cgp_paysafecash>
+			<cgp_giftcard translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_giftcard</model>
+				<title>Gift Card</title>
+			</cgp_giftcard>
 		</cgp>
 	</default>
-
 
 </config>
