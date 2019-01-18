@@ -57,11 +57,10 @@ class Cardgate_Cgp_Block_Form_Ideal extends Mage_Payment_Block_Form
 		$form->addField( $_code . '_ideal_issuer', 'select', 
 				array( 
 						'name' => 'payment[cgp][ideal_issuer_id]', 
-						'class' => 'required-entry', 
 						'label' => Mage::helper( 'cgp' )->__( 'Select your bank' ), 
 						'values' => $a2, 
-						'value' => '', 
-						'required' => true, 
+						'value' => '',
+				        'required' => true,
 						'disabled' => false 
 				) );
 		return $form->getHtml();
