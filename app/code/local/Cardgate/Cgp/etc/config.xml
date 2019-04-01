@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.10</version>
+			<version>1.2.11</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -154,16 +154,15 @@
 					</cgp>
 				</observers>
 			</sales_order_payment_place_end>
-			<!--
-			<sales_order_load_after>
-				<observers>
-					<cgp>
-						<type>singleton</type>
-						<class>cgp/observer</class>
-						<method>salesOrderLoadAfter</method>
-					</cgp>
-				</observers>
-			</sales_order_load_after>-->
+			<controller_action_postdispatch_adminhtml_system_config_save>
+    			<observers>
+       				<cgp>
+           				<type>singleton</type>
+           				<class>cgp/observer</class>
+           			<method>clearIssuers</method> 
+       				</cgp>
+    			</observers>
+			</controller_action_postdispatch_adminhtml_system_config_save>
 		</events>
 	</global>
 
