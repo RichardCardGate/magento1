@@ -46,7 +46,7 @@ class Cardgate_Cgp_Model_Observer extends Mage_Core_Model_Abstract
 		$registerdata = $paymentmethod->register($order);
 		// YYY: Do we need $registerdata?
 	}
-
+	
 	protected static function addInvoiceFeeToQuote( $quote )
 	{
 		$quote->setInvoiceFee( 0 );
@@ -104,4 +104,12 @@ class Cardgate_Cgp_Model_Observer extends Mage_Core_Model_Abstract
 
 		$info->save();
 	}
+	
+	public function clearIssuers(Varien_Event_Observer $observer){	    
+	    $cacheId = 'cgpbankissuers';
+	    $lifeTime = 1;
+	    Mage::app()->removeCache($cacheId);
+	}
+	
+	
 }
