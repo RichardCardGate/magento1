@@ -47,14 +47,6 @@ class Cardgate_Cgp_Model_Observer extends Mage_Core_Model_Abstract
 		// YYY: Do we need $registerdata?
 	}
 	
-	public function adminhtmlSystemConfigChangedSection(){
-	    die('I have called the admin config changed observer');
-	}
-	
-	public function adminSystemConfigChangedSectionAdminhtml(){
-	    die('test');
-	}
-
 	protected static function addInvoiceFeeToQuote( $quote )
 	{
 		$quote->setInvoiceFee( 0 );
