@@ -74,20 +74,26 @@ class Cardgate_Cgp_Block_Form_Ideal extends Mage_Payment_Block_Form
 	 */
 	private function getBankOptions ()
 	{
-		
-	    $ideal = Mage::getSingleton( 'cgp/gateway_ideal' );
-		$client = new Varien_Http_Client( $ideal->getGatewayUrl() . '/cache/idealDirectoryCUROPayments.dat' );
-		try{
-			$response = $client->request();
-			if ($response->isSuccessful()) {
-				$aBanks = unserialize( $response->getBody() );
-				if ( is_array( $aBanks ) ) {
-					unset($aBanks[0]);
-					$this->_banks = array_merge(array(''=>''),$aBanks);
-				}
-			}
-		} catch (Exception $e) {
-		}
+	    $cacheId = 'cgpbankissuers';
+	    $sBanks = Mage::app()->loadCache($cacheId);
+	    if ($sBanks === false){
+	       $ideal = Mage::getSingleton( 'cgp/gateway_ideal' );
+		  $client = new Varien_Http_Client( $ideal->getGatewayUrl() . '/cache/idealDirectoryCUROPayments.dat' );
+		  try{
+	           $response = $client->request();
+			   if ($response->isSuccessful()) {
+				    $aBanks = unserialize( $response->getBody() );
+			         if ( is_array( $aBanks ) ) {
+					   unset($aBanks[0]);
+					   $sBanks = serialize($aBanks);
+					   $lifeTime = 24 * 60 * 60;
+					   Mage::app()->saveCache($sBanks, $cacheId, array(Mage_Core_Model_Config::CACHE_TAG), $lifeTime);
+				    }
+			     }
+		      }catch (Exception $e) {
+		      }
+	    }
+	    $this->_banks = unserialize($sBanks);
 		$this->_banks[''] = Mage::helper( 'cgp' )->__( '--Please select--' );
 		return $this->_banks;
 	}

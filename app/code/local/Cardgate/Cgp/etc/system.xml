@@ -19,6 +19,7 @@
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
+            
             <groups>
                 <version translate="label" module="cgp">
                     <label>Version</label>
@@ -249,7 +250,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </debug>                        
+                        </debug>                     
                     </fields>
                 </settings>
                 
