@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.11</version>
+			<version>1.2.12</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -251,7 +251,7 @@
 			<cardgate>
 				<children>
 					<resend>
-						<title>Resend POEKOE</title>
+						<title>Resend</title>
 						<sort_order>10</sort_order>
 					</resend>
 				</children>

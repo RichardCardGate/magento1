@@ -38,6 +38,10 @@ class Cardgate_Cgp_StandardController extends Mage_Core_Controller_Front_Action 
 	 */
 	protected function validate ( $data ) {
 
+		if (!isset($data['testmode'])){
+			$data['testmode'] = false;
+		}
+
 		$hashString = ( ( $data['is_test'] || $data['testmode'] ) ? 'TEST' : '' )
 			. $data['transaction_id']
 			. $data['currency']
