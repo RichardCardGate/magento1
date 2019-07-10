@@ -251,7 +251,7 @@
 			<cardgate>
 				<children>
 					<resend>
-						<title>Resend POEKOE</title>
+						<title>Resend</title>
 						<sort_order>10</sort_order>
 					</resend>
 				</children>
