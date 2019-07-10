@@ -757,7 +757,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			$apiresult = $this->doApiCall( ( $registerdata['option'] ? $registerdata['option'].'/' : '' ) . 'payment', $registerdata );
 			$result = $apiresult['result'];
 		} catch ( Exception $e ) {
-			$base->log( 'Refund failed! ' . $e->getCode() . '/' . $e->getMessage() );
+			$base->log( 'Register failed! ' . $e->getCode() . '/' . $e->getMessage() );
 			Mage::throwException( Mage::helper( 'cgp' )->__( 'CardGate register for order %s failed. Reason: %s', $order->getId(), $e->getCode() . '/' . $e->getMessage() ) );
 		}
 		return $apiresult;
