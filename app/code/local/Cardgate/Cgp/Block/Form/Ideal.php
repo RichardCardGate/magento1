@@ -11,16 +11,17 @@ class Cardgate_Cgp_Block_Form_Ideal extends Mage_Payment_Block_Form
 
 	protected $_banks = array( 
 			'' => 'Please select',
-			'RABONL2U' => 'Rabobank', 
 			'ABNANL2A' => 'ABN Amro Bank',
-			'INGBNL2A' => 'ING', 
-			'SNSBNL2A' => 'SNS Bank',
+			'ASNBNL21' => 'ASN Bank',
+			'HANDNL2A' => 'Handelsbanken',
+			'BUNQNL2A' => 'bunq',
+			'INGBNL2A' => 'ING',
 			'KNABNL2H' => 'Knab',
-			'FVLBNL22' => 'Van Lanschot Bankiers', 
-			'TRIONL2U' => 'Triodos Bank', 
-			'ASNBNL21' => 'ASN Bank', 
+			'RABONL2U' => 'Rabobank',
 			'RBRBNL21' => 'RegioBank',
-            'BUNQNL2A' => 'bunq'
+			'SNSBNL2A' => 'SNS Bank',
+			'TRIONL2U' => 'Triodos Bank',
+			'FVLBNL22' => 'Van Lanschot Bankiers'
 	);
 
 	protected function _construct ()
@@ -74,27 +75,41 @@ class Cardgate_Cgp_Block_Form_Ideal extends Mage_Payment_Block_Form
 	 */
 	private function getBankOptions ()
 	{
-	    $cacheId = 'cgpbankissuers';
-	    $sBanks = Mage::app()->loadCache($cacheId);
-	    if ($sBanks === false){
-	       $ideal = Mage::getSingleton( 'cgp/gateway_ideal' );
-		  $client = new Varien_Http_Client( $ideal->getGatewayUrl() . '/cache/idealDirectoryCUROPayments.dat' );
-		  try{
-	           $response = $client->request();
-			   if ($response->isSuccessful()) {
-				    $aBanks = unserialize( $response->getBody() );
-			         if ( is_array( $aBanks ) ) {
-					   unset($aBanks[0]);
-					   $sBanks = serialize($aBanks);
-					   $lifeTime = 24 * 60 * 60;
-					   Mage::app()->saveCache($sBanks, $cacheId, array(Mage_Core_Model_Config::CACHE_TAG), $lifeTime);
+		$sBanks = Mage::app()->loadCache('cgpbankissuers');
+
+		if (($sBanks != false) && !$this->issuerModeChanged()){
+			$this->_banks = unserialize($sBanks);
+		} else {
+	        $ideal = Mage::getSingleton( 'cgp/gateway_ideal' );
+		    $client = new Varien_Http_Client( $ideal->getGatewayUrl() . '/cache/idealDirectoryCUROPayments.dat' );
+		    try{
+		    	$response = $client->request();
+			    if ($response->isSuccessful()) {
+			    	$aBanks = unserialize( $response->getBody() );
+			    	if ( is_array( $aBanks) && array_key_exists("INGBNL2A",$aBanks)) {
+					    unset($aBanks[0]);
+					    $sBanks = serialize($aBanks);
+					    $sCurrentMode = $ideal->getConfigData("test_mode");
+					    $lifeTime = 24 * 60 * 60;
+					    Mage::app()->saveCache($sBanks, 'cgpbankissuers', array(Mage_Core_Model_Config::CACHE_TAG), $lifeTime);
+					    Mage::app()->saveCache($sCurrentMode, 'cgpissuermode', array(Mage_Core_Model_Config::CACHE_TAG), $lifeTime);
+					    $this->_banks = $aBanks;
 				    }
-			     }
-		      }catch (Exception $e) {
-		      }
-	    }
-	    $this->_banks = unserialize($sBanks);
+			    }
+		    }catch (Exception $e) {
+		    	// use the default isssuer list
+		    }
+		}
+
 		$this->_banks[''] = Mage::helper( 'cgp' )->__( '--Please select--' );
 		return $this->_banks;
+	}
+
+	private function issuerModeChanged(){
+		$ideal = Mage::getSingleton( 'cgp/gateway_ideal' );
+		$sCurrentMode = $ideal->getConfigData("test_mode");
+		$sIssuerMode = Mage::app()->loadCache('cgpissuermode');
+		$newMode = ($sCurrentMode == $sIssuerMode ? false : true);
+		return $newMode;
 	}
 }
