@@ -619,7 +619,12 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			case 'giftcard':
 			    $s_arr['option'] = 'giftcard';
 			    break;
-		     */
+
+			//OnlineÜberweisen
+			case 'onlineueberweisen':
+				$s_arr['option'] = 'onlineueberweisen';
+				break;
+			*/
 
 			// Default
 			default:
