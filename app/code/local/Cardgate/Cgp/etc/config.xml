@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.13</version>
+			<version>1.2.14</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -425,6 +425,11 @@
 				<model>cgp/gateway_giftcard</model>
 				<title>CGP Gift Card</title>
 			</cgp_giftcard>
+			<cgp_onlineueberweisen>
+				<active>1</active>
+				<model>cgp/gateway_onlineueberweisen</model>
+				<title>CGP OnlineÜberweisen</title>
+			</cgp_onlineueberweisen>
 		</payment>
 
 		<cgp>
@@ -583,6 +588,11 @@
 				<model>cgp/gateway_giftcard</model>
 				<title>Gift Card</title>
 			</cgp_giftcard>
+			<cgp_onlineueberweisen translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_onlineueberweisen</model>
+				<title>OnlineÜberweisen</title>
+			</cgp_onlineueberweisen>
 		</cgp>
 	</default>
 
