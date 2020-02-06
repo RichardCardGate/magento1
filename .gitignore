@@ -57,3 +57,13 @@ skin/adminhtml/default/default/*
 !skin/adminhtml/default/default/images
 skin/adminhtml/default/default/images/*
 !skin/adminhtml/default/default/images/cardgate
+
+!tests/
+!tests/bootstrap.php
+!tests/phpunit.xml
+!README.md
+!README_DE.md
+!README_NL.md
+!composer.json
+!.travis.yml
+!phpunit.xml.dist
