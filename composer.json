@@ -1,0 +1,15 @@
+{
+  "name": "cardgate/magento1",
+  "type": "library",
+  "description": "CardGate payment processing module for Magento 1",
+  "keywords": [
+    "magento",
+    "cardgate",
+    "payment"
+  ],
+  "homepage": "https://www.cardgate.com",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": { "Cardgate\\magento1\\" : "" }
+  }
+}

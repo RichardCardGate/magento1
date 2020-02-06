@@ -2,6 +2,8 @@
 
 # CardGate module voor Magento 1
 
+[![Build Status](https://travis-ci.org/cardgate/magento1.svg?branch=master)](https://travis-ci.org/cardgate/magento1)
+
 ## Support
 
 Deze module is geschikt voor Magento Commerce versie **1.7 tot 1.9.3.x** .
