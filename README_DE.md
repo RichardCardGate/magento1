@@ -6,7 +6,7 @@
 
 ## Support
 
-Dieses Modul ist geeignet für Magento Commerce Version **1.7 bis 1.9.3.x**
+Dieses Modul ist geeignet für Magento Commerce Version **1.7 bis 1.9.4.x**
 
 ## Vorbereitung
 
