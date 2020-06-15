@@ -6,7 +6,7 @@
 
 ## Support
 
-This module supports Magento version **1.7 to 1.9.3.x**.
+This module supports Magento version **1.7 to 1.9.4.x**.
 
 ## Preparation
 
