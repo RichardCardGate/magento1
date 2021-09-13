@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.14</version>
+			<version>1.2.15</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -430,6 +430,11 @@
 				<model>cgp/gateway_onlineueberweisen</model>
 				<title>CGP OnlineÜberweisen</title>
 			</cgp_onlineueberweisen>
+			<cgp_spraypay>
+				<active>1</active>
+				<model>cgp/gateway_spraypay</model>
+				<title>CGP SprayPay</title>
+			</cgp_spraypay>
 		</payment>
 
 		<cgp>
@@ -593,6 +598,11 @@
 				<model>cgp/gateway_onlineueberweisen</model>
 				<title>OnlineÜberweisen</title>
 			</cgp_onlineueberweisen>
+			<cgp_spraypay translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_spraypay</model>
+				<title>SprayPay</title>
+			</cgp_spraypay>
 		</cgp>
 	</default>
 
