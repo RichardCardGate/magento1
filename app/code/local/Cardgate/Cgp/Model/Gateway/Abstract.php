@@ -531,10 +531,7 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 				$s_arr['option'] = 'bancontact';
 				break;
 
-			/*// Giropay
-			case 'giropay':
-				$s_arr['option'] = 'giropay';
-				break;
+			/*/
 
 			// PayPal
 			case 'paypal':
