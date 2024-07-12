@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.15</version>
+			<version>1.2.16</version> 
 		</Cardgate_Cgp>
 	</modules>
 
@@ -365,11 +365,6 @@
 				<model>cgp/gateway_klarnaaccount</model>
 				<title>CGP KlarnaAccount</title>
 			</cgp_klarnaaccount>
-			<cgp_giropay>
-				<active>1</active>
-				<model>cgp/gateway_giropay</model>
-				<title>CGP Giropay</title>
-			</cgp_giropay>
 			<cgp_banktransfer>
 				<active>1</active>
 				<model>cgp/gateway_banktransfer</model>
@@ -533,11 +528,6 @@
 				<model>cgp/gateway_klarnaaccount</model>
 				<title>Klarna Account</title>
 			</cgp_klarnaaccount>
-			<cgp_giropay translate="title" module="cgp">
-				<active>0</active>
-				<model>cgp/gateway_giropay</model>
-				<title>Giropay</title>
-			</cgp_giropay>
 			<cgp_banktransfer translate="title" module="cgp">
 				<active>0</active>
 				<model>cgp/gateway_banktransfer</model>
