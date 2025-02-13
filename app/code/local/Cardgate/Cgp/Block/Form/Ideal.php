@@ -33,12 +33,21 @@ class Cardgate_Cgp_Block_Form_Ideal extends Mage_Payment_Block_Form
 	/**
 	 * Return information payment object
 	 *
-	 * @return Mage_Payment_Model_Info
+	 * @return Mage_Payment_Model_Info as bool
 	 */
 	public function getInfoInstance ()
 	{
 		return $this->getMethod()->getInfoInstance();
 	}
+
+    /**
+     * Return show issuers setting as bool
+     * @return bool
+     */
+    public function showIssuers() {
+        $ideal = Mage::getSingleton( 'cgp/gateway_ideal' );
+        return boolval( $ideal->getConfigData("showissuers") );
+    }
 
 	/**
 	 * Returns HTML options for select field with iDEAL banks
