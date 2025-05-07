@@ -104,12 +104,4 @@ class Cardgate_Cgp_Model_Observer extends Mage_Core_Model_Abstract
 
 		$info->save();
 	}
-	
-	public function clearIssuers(Varien_Event_Observer $observer){	    
-	    $cacheId = 'cgpbankissuers';
-	    $lifeTime = 1;
-	    Mage::app()->removeCache($cacheId);
-	}
-	
-	
 }

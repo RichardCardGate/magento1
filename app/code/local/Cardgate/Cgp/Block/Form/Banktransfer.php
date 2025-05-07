@@ -26,7 +26,7 @@ class Cardgate_Cgp_Block_Form_Banktransfer extends Mage_Payment_Block_Form
 	}
 
 	/**
-	 * Returns HTML options for select field with iDEAL banks
+	 * Returns instructions payment object
 	 *
 	 * @return string
 	 */

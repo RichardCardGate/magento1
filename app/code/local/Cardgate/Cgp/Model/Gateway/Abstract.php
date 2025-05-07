@@ -523,10 +523,6 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			// iDEAL
 			case 'ideal':
 				$s_arr['option'] = 'ideal';
-                $iShowIssuers = $this->getConfigData('showissuers');
-                if ($iShowIssuers == 1) {
-                    $s_arr['suboption'] = $extra_data['ideal_issuer_id'];
-                }
                 break;
 
 			// Mister Cash
