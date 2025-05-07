@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.18</version>
+			<version>1.2.19</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -154,15 +154,6 @@
 					</cgp>
 				</observers>
 			</sales_order_payment_place_end>
-			<controller_action_postdispatch_adminhtml_system_config_save>
-    			<observers>
-       				<cgp>
-           				<type>singleton</type>
-           				<class>cgp/observer</class>
-           			<method>clearIssuers</method> 
-       				</cgp>
-    			</observers>
-			</controller_action_postdispatch_adminhtml_system_config_save>
 		</events>
 	</global>
 
