@@ -10,7 +10,7 @@
 <config>
 	<modules>
 		<Cardgate_Cgp>
-			<version>1.2.19</version>
+			<version>1.2.20</version>
 		</Cardgate_Cgp>
 	</modules>
 
@@ -381,6 +381,11 @@
 				<model>cgp/gateway_bitcoin</model>
 				<title>CGP Bitcoin</title>
 			</cgp_bitcoin>
+			<cgp_crypto>
+				<active>1</active>
+				<model>cgp/gateway_crypto</model>
+				<title>CGP Crypto</title>
+			</cgp_crypto>
 			<cgp_pos>
 				<active>1</active>
 				<model>cgp/gateway_pos</model>
@@ -544,6 +549,11 @@
 				<model>cgp/gateway_bitcoin</model>
 				<title>Bitcoin</title>
 			</cgp_bitcoin>
+			<cgp_crypto translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_crypto</model>
+				<title>Crypto</title>
+			</cgp_crypto>
 			<cgp_pos translate="title" module="cgp">
 				<active>0</active>
 				<model>cgp/gateway_pos</model>
