@@ -262,6 +262,41 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 		return @$config[$field];
 	}
 
+    /**
+     * Check whether payment method can be used
+     *
+     * @param Mage_Sales_Model_Quote|null $quote
+     * @return bool
+     */
+    public function isAvailable($quote = null)
+    {
+        if (!parent::isAvailable($quote)) {
+            return false;
+        }
+
+        if (is_null($quote)) {
+            // If no quote is passed, try to get it from the checkout session.
+            if (Mage::app()->getStore()->isAdmin()) {
+                $quote = Mage::getSingleton('adminhtml/session_quote')->getQuote();
+            } else {
+                $quote = Mage::getSingleton('checkout/session')->getQuote();
+            }
+        }
+
+        // If we still don't have a quote or the quote has no items, we can't proceed.
+        if (!$quote || !$quote->hasItems()) {
+            return false;
+        }
+
+        $sCurrencyCode  = $quote->getQuoteCurrencyCode();
+        $sPaymentMethod = 'cardgate'.$this->_model;
+
+        if (!$this->checkPaymentCurrency($sCurrencyCode,$sPaymentMethod)) {
+            return false;
+        }
+        return true;
+    }
+
 	/**
 	 * Validate if the currency code is supported by Card Gate Plus
 	 *
@@ -300,6 +335,32 @@ abstract class Cardgate_Cgp_Model_Gateway_Abstract extends Mage_Payment_Model_Me
 			$order->save();
 		}
 	}
+
+    /**
+     *  Check if the currency is allowed for this payment method.
+     *
+     * @param $currency
+     * @param $payment_method
+     *
+     * @return bool
+     */
+    public function checkPaymentCurrency($currency,$payment_method):bool {
+        $strictly_euro = in_array($payment_method,['cardgateideal',
+            'cardgateidealqr',
+            'cardgatebancontact',
+            'cardgatebanktransfer',
+            'cardgatebillink',
+            'cardgatesofortbanking',
+            'cardgatedirectdebit',
+            'cardgateonlineueberweisen',
+            'cardgatespraypay']);
+        if ($strictly_euro && $currency != 'EUR') return false;
+
+        $strictly_pln = in_array($payment_method,['cardgateprzelewy24']);
+        if ($strictly_pln && $currency != 'PLN') return false;
+
+        return true;
+    }
 
 	/**
 	 * Generates checkout form fields
