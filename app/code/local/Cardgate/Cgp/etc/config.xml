@@ -331,11 +331,6 @@
 				<model>cgp/gateway_ideal</model>
 				<title>CGP iDEAL</title>
 			</cgp_ideal>
-			<cgp_mistercash>
-				<active>1</active>
-				<model>cgp/gateway_mistercash</model>
-				<title>CGP Bancontact</title>
-			</cgp_mistercash>
 			<cgp_paypal>
 				<active>1</active>
 				<model>cgp/gateway_paypal</model>
@@ -361,6 +356,11 @@
 				<model>cgp/gateway_banktransfer</model>
 				<title>CGP Bank Transfer</title>
 			</cgp_banktransfer>
+			<cgp_bancontact>
+				<active>1</active>
+				<model>cgp/gateway_bancontact</model>
+				<title>CGP Bancontact</title>
+			</cgp_bancontact>
 			<cgp_directdebit>
 				<active>1</active>
 				<model>cgp/gateway_directdebit</model>
@@ -499,11 +499,6 @@
 				<model>cgp/gateway_ideal</model>
 				<title>iDEAL</title>
 			</cgp_ideal>
-			<cgp_mistercash translate="title" module="cgp">
-				<active>0</active>
-				<model>cgp/gateway_mistercash</model>
-				<title>Bancontact/Mistercash</title>
-			</cgp_mistercash>
 			<cgp_paypal translate="title" module="cgp">
 				<active>0</active>
 				<model>cgp/gateway_paypal</model>
@@ -529,6 +524,11 @@
 				<model>cgp/gateway_banktransfer</model>
 				<title>Bank Transfer</title>
 			</cgp_banktransfer>
+			<cgp_bancontact translate="title" module="cgp">
+				<active>0</active>
+				<model>cgp/gateway_bancontact</model>
+				<title>Bancontact</title>
+			</cgp_bancontact>
 			<cgp_directdebit translate="title" module="cgp">
 				<active>0</active>
 				<model>cgp/gateway_directdebit</model>
